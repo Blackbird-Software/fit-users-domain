@@ -8,7 +8,7 @@
 ###< symfony/framework-bundle ###
 
 ###> symfony/web-server-bundle ###
-/.web-server-pid
+/app/.web-server-pid
 ###< symfony/web-server-bundle ###
 
 ###> other ###
