@@ -1,0 +1,25 @@
+version: "3.1"
+services:
+
+    nginx:
+      image: nginx:alpine
+      container_name: users-nginx
+      volumes:
+          - ./app:/var/www/symfony
+          - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+       - "8088:80"
+
+    php-fpm:
+      build: phpdocker/php-fpm
+      container_name: users-php
+      volumes:
+        - ./app:/var/www/symfony
+        - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini
+
+    redis:
+      container_name: users-redis
+      image: redis:alpine
+      ports:
+        - "6380:6379"
+

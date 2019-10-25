@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  generators:
+    namespace: App\Infrastructure\Service\Generator\
+    resource: "%kernel.project_dir%/src/Infrastructure/Service/Generator/*"

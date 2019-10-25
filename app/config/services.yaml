@@ -1,0 +1,18 @@
+parameters:
+    locale: 'en'
+
+imports:
+    - { resource: "services/**/*.yaml" }
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    Predis\Client: '@snc_redis.default'
+
+    App\Application\Repository\UsersRepositoryInterface: '@App\Infrastructure\Repository\UsersRedisRepository'
+    App\Infrastructure\Service\Generator\IdGeneratorInterface: '@App\Infrastructure\Service\Generator\RandomIntegerIdGenerator'
+    App\Infrastructure\Security\Hasher\PasswordHasherInterface: '@App\Infrastructure\Security\Hasher\BcryptPasswordHasher'
+

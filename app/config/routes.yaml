@@ -1,0 +1,21 @@
+register:
+  path: '/users'
+  methods: ['POST']
+  defaults:
+    _controller: 'App\Infrastructure\Controller\Action\RegisterAction'
+
+fetch:
+  path: '/users/{id}'
+  methods: ['GET']
+  defaults:
+    _controller: 'App\Infrastructure\Controller\Action\GetAction'
+  requirements:
+    id: '\d+'
+
+remove:
+  path: '/users/{id}'
+  methods: ['DELETE']
+  defaults:
+    _controller: 'App\Infrastructure\Controller\Action\RemoveAction'
+  requirements:
+    id: '\d+'
