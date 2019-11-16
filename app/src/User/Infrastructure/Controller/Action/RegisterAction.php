@@ -7,7 +7,7 @@ use App\Shared\Infrastructure\Controller\Action\AbstractAction;
 use App\User\Domain\Repository\Users;
 use App\User\Infrastructure\DTO\RegisterUserRequest;
 use App\User\Infrastructure\Factory\UsersFactoryInterface;
-use App\User\Infrastructure\View\UserViews;
+use App\User\Infrastructure\View\Repository\UserViews;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Response;
 

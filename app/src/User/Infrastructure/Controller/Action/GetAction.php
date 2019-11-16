@@ -7,7 +7,7 @@ use App\Shared\Infrastructure\Controller\Action\AbstractAction;
 use App\Shared\Infrastructure\Generator\IdGeneratorInterface;
 use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\View\Exception\UserViewNotFoundException;
-use App\User\Infrastructure\View\UserViews;
+use App\User\Infrastructure\View\Repository\UserViews;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

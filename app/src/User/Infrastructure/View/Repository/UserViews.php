@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\View;
+namespace App\User\Infrastructure\View\Repository;
 
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\UserId;

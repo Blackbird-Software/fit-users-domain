@@ -8,7 +8,6 @@ use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\View\Exception\UserViewNotFoundException;
 use App\User\Infrastructure\View\Factory\UserViewsFactoryInterface;
 use App\User\Infrastructure\View\Model\UserView;
-use App\User\Infrastructure\View\UserViews;
 use Predis\Client;
 
 final class UserViewsRedisRepository implements UserViews
@@ -60,6 +59,14 @@ final class UserViewsRedisRepository implements UserViews
 
     public function findAll(): array
     {
-        // TODO: Implement findAll() method.
+        $users = [];
+        $keys = $this->client->keys('*');
+
+        foreach ($keys as $key) {
+           $user = $this->client->hgetall($key);
+           $users[] = $this->factory->fromArray($user);
+        }
+
+        return $users;
     }
 }

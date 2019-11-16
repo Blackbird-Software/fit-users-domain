@@ -12,6 +12,12 @@ fetch:
   requirements:
     id: '\d+'
 
+browse:
+  path: '/users'
+  methods: ['GET']
+  defaults:
+    _controller: 'App\User\Infrastructure\Controller\Action\BrowseAction'
+
 remove:
   path: '/users/{id}'
   methods: ['DELETE']
