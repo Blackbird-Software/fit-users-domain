@@ -77,7 +77,7 @@ final class UserViewsRedisRepository implements UserViews
 
     public function getPaginatedCollection(array $params): PaginatedCollectionInterface
     {
-        return $this->createPaginatedCollection($params, 'browse');
+        return $this->createPaginatedCollection($params, 'api_browse_users');
     }
 
     private function createPaginatedCollection(array $params, string $route): PaginatedCollectionInterface

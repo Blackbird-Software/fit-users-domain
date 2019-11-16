@@ -1,0 +1,27 @@
+register_user:
+  path: '/users'
+  methods: ['POST']
+  defaults:
+    _controller: 'App\User\Infrastructure\Controller\Action\RegisterAction'
+
+fetch_user:
+  path: '/users/{id}'
+  methods: ['GET']
+  defaults:
+    _controller: 'App\User\Infrastructure\Controller\Action\GetAction'
+  requirements:
+    id: '\d+'
+
+browse_users:
+  path: '/users'
+  methods: ['GET']
+  defaults:
+    _controller: 'App\User\Infrastructure\Controller\Action\BrowseAction'
+
+remove_user:
+  path: '/users/{id}'
+  methods: ['DELETE']
+  defaults:
+    _controller: 'App\User\Infrastructure\Controller\Action\RemoveAction'
+  requirements:
+    id: '\d+'
