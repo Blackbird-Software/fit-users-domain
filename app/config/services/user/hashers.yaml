@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  hashers:
+    namespace: App\User\Infrastructure\Security\Hasher\
+    resource: "%kernel.project_dir%/src/User/Infrastructure/Security/Hasher/*"

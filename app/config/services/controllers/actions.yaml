@@ -1,9 +1,0 @@
-services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: true
-
-  actions:
-    namespace: App\Infrastructure\Controller\Action\
-    resource: "%kernel.project_dir%/src/Infrastructure/Controller/Action/*"

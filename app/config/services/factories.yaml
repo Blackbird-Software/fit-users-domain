@@ -1,9 +1,0 @@
-services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: true
-
-  factories:
-    namespace: App\Infrastructure\Service\Factory\
-    resource: "%kernel.project_dir%/src/Infrastructure/Service/Factory/*"

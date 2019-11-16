@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  arguments_resolvers:
+    namespace: App\Shared\Infrastructure\Controller\ArgumentResolver\
+    resource: "%kernel.project_dir%/src/Shared/Infrastructure/Controller/ArgumentResolver/*"
+    tags:
+      - { name: 'controller.argument_value_resolver', priority: 50 }
