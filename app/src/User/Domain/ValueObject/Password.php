@@ -7,7 +7,7 @@ use App\Shared\Domain\ValueObject\AbstractValueObject;
 use App\User\Domain\ValueObject\Exception\InvalidPasswordException;
 use App\User\Domain\ValueObject\Validator\PasswordValidator;
 
-class Password extends AbstractValueObject
+final class Password extends AbstractValueObject
 {
     public const PASSWORD_MIN_CHARS = 8;
 

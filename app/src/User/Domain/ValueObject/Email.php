@@ -7,7 +7,7 @@ use App\Shared\Domain\ValueObject\AbstractValueObject;
 use App\User\Domain\ValueObject\Exception\InvalidEmailException;
 use App\User\Domain\ValueObject\Validator\EmailValidator;
 
-class Email extends AbstractValueObject
+final class Email extends AbstractValueObject
 {
     /** @throws InvalidEmailException */
     public function __construct(string $value)

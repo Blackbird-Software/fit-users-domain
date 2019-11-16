@@ -7,7 +7,7 @@ use App\Shared\Domain\ValueObject\AbstractValueObject;
 use App\User\Domain\ValueObject\Exception\InvalidLocaleException;
 use App\User\Domain\ValueObject\Validator\LocaleValidator;
 
-class Locale extends AbstractValueObject
+final class Locale extends AbstractValueObject
 {
     /**
      * @throws InvalidLocaleException

@@ -6,7 +6,7 @@ namespace App\User\Domain\ValueObject;
 use App\Shared\Domain\ValueObject\IdInterface;
 use App\Shared\Domain\ValueObject\ValueObjectInterface;
 
-class UserId implements ValueObjectInterface
+final class UserId implements ValueObjectInterface
 {
     private string $value;
 

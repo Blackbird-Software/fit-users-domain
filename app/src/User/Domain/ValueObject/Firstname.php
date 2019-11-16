@@ -5,6 +5,6 @@ namespace App\User\Domain\ValueObject;
 
 use App\Shared\Domain\ValueObject\AbstractValueObject;
 
-class Firstname extends AbstractValueObject
+final class Firstname extends AbstractValueObject
 {
 }

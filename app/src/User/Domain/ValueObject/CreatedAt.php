@@ -7,7 +7,7 @@ use App\Shared\Domain\ValueObject\ValueObjectInterface;
 use App\User\Domain\ValueObject\Exception\InvalidCreatedAtException;
 use App\User\Domain\ValueObject\Validator\CreatedAtValidator;
 
-class CreatedAt implements ValueObjectInterface
+final class CreatedAt implements ValueObjectInterface
 {
     private \DateTimeImmutable $value;
 
