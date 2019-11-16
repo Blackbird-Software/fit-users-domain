@@ -10,6 +10,7 @@ use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Routing\RouterInterface;
 
+// @TODO create an interface!
 final class RedisPaginationFactory
 {
     public const DEFAULT_PER_PAGE = 25;
