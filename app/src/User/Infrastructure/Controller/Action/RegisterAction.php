@@ -37,6 +37,7 @@ final class RegisterAction extends AbstractAction
         $this->repository->add($user);
 
         // @TODO not in the interface?
+        // @TODO set location href
         return $this->createApiResponse(
             $this->readRepository->get($user->id()),
             Response::HTTP_CREATED
