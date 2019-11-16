@@ -53,5 +53,4 @@ final class UsersRedisRepository implements Users
     {
        $this->client->del($user->id()->value());
     }
-
 }

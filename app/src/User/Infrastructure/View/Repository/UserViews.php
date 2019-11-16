@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\View\Repository;
 
+use App\Shared\Infrastructure\Pagination\PaginatedCollectionInterface;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\View\Exception\UserViewNotFoundException;
@@ -25,4 +26,6 @@ interface UserViews
     public function getByEmail(Email $email): UserView;
 
     public function findAll(): array;
+
+    public function getPaginatedCollection(array $params): PaginatedCollectionInterface;
 }

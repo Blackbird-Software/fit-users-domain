@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  pagination:
+    namespace: App\User\Infrastructure\Pagination\
+    resource: "%kernel.project_dir%/src/User/Infrastructure/Pagination/*"
+
+

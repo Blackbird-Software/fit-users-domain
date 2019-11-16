@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\View\Repository;
 
+use App\Shared\Infrastructure\Pagination\PaginatedCollectionInterface;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\UserId;
+use App\User\Infrastructure\Pagination\RedisPaginationFactory;
 use App\User\Infrastructure\View\Exception\UserViewNotFoundException;
 use App\User\Infrastructure\View\Factory\UserViewsFactoryInterface;
 use App\User\Infrastructure\View\Model\UserView;
@@ -16,10 +18,13 @@ final class UserViewsRedisRepository implements UserViews
 
     private UserViewsFactoryInterface $factory;
 
-    public function __construct(Client $client, UserViewsFactoryInterface $factory)
+    private RedisPaginationFactory $paginationFactory;
+
+    public function __construct(Client $client, UserViewsFactoryInterface $factory, RedisPaginationFactory $paginationFactory)
     {
         $this->client = $client;
         $this->factory = $factory;
+        $this->paginationFactory = $paginationFactory;
     }
 
     public function contains(UserId $id): bool
@@ -68,5 +73,19 @@ final class UserViewsRedisRepository implements UserViews
         }
 
         return $users;
+    }
+
+    public function getPaginatedCollection(array $params): PaginatedCollectionInterface
+    {
+        return $this->createPaginatedCollection($params, 'browse');
+    }
+
+    private function createPaginatedCollection(array $params, string $route): PaginatedCollectionInterface
+    {
+        return $this->paginationFactory->createCollection(
+            $this->findAll(),
+            $params,
+            $route
+        );
     }
 }

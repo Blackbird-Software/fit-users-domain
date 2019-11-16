@@ -21,6 +21,8 @@ final class BrowseAction extends AbstractAction
 
     public function __invoke(Request $request): Response
     {
-        return $this->createApiResponse($this->repository->findAll());
+        $params = $request->query->all();
+
+        return $this->createApiResponse($this->repository->getPaginatedCollection($params));
     }
 }
