@@ -8,7 +8,7 @@ use App\Infrastructure\DTO\RegisterUserRequest;
 
 interface UsersFactoryInterface
 {
-    public function fromArray(array $params): ?UserInterface;
+    public function fromArray(array $params): UserInterface;
 
     public function fromDTO(RegisterUserRequest $request): UserInterface;
 

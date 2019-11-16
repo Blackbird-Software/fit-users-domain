@@ -15,4 +15,5 @@ services:
     App\Application\Repository\UsersRepositoryInterface: '@App\Infrastructure\Repository\UsersRedisRepository'
     App\Infrastructure\Service\Generator\IdGeneratorInterface: '@App\Infrastructure\Service\Generator\RandomIntegerIdGenerator'
     App\Infrastructure\Security\Hasher\PasswordHasherInterface: '@App\Infrastructure\Security\Hasher\BcryptPasswordHasher'
+    App\Infrastructure\Service\Factory\UsersFactoryInterface: '@App\Infrastructure\Service\Factory\UsersFactory'
 

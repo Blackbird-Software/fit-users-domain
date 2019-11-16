@@ -13,7 +13,8 @@ interface UsersRepositoryInterface
 
     public function contains(IdInterface $id): bool;
 
-    public function find(IdInterface $id): ?UserInterface;
+    // possibly could be null
+    public function find(IdInterface $id): UserInterface;
 
     public function get(IdInterface $id): UserInterface;
 

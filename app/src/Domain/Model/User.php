@@ -27,7 +27,7 @@ final class User implements UserInterface
 
     private Locale $locale;
 
-    private function __construct(IdInterface $id, Firstname $firstname, Lastname $lastname, Email $email, Password $password,
+    public function __construct(IdInterface $id, Firstname $firstname, Lastname $lastname, Email $email, Password $password,
                                  CreatedAt $createdAt, Locale $locale)
     {
         $this->id = $id;
@@ -39,7 +39,7 @@ final class User implements UserInterface
         $this->locale = $locale;
     }
 
-    public static function create(IdInterface $id, Firstname $firstname, Lastname $lastname, Email $email, Password $password,
+    public static function register(IdInterface $id, Firstname $firstname, Lastname $lastname, Email $email, Password $password,
                                     CreatedAt $createdAt, Locale $locale): self
     {
         return new self($id, $firstname, $lastname, $email, $password, $createdAt, $locale);

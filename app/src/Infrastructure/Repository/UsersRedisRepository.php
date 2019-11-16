@@ -33,7 +33,11 @@ final class UsersRedisRepository implements UsersRepositoryInterface
         return (bool) $this->find($id);
     }
 
-    public function find(IdInterface $id): ?UserInterface
+    /**
+     * Basically, find method can return nullable object, however, to not to deal with if statements,
+     * in that case I'm going to return NullObject implementation instead.
+     */
+    public function find(IdInterface $id): UserInterface
     {
         $params = $this->client->hgetall($id->value());
 

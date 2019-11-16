@@ -23,7 +23,7 @@ final class UsersInMemoryRepository implements UsersRepositoryInterface
         return (bool) $this->find($id);
     }
 
-    public function find(IdInterface $id): ?UserInterface
+    public function find(IdInterface $id): UserInterface
     {
         /** @var UserInterface $user */
         foreach ($this->users as $user) {

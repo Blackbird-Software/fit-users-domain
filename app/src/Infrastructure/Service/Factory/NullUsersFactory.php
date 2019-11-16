@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Service\Factory;
 
-use App\Domain\Model\User;
+use App\Domain\Model\NullUser;
 use App\Domain\Model\UserInterface;
 use App\Domain\ValueObject\CreatedAt;
 use App\Domain\ValueObject\Email;
@@ -19,43 +19,21 @@ use App\Infrastructure\DTO\RegisterUserRequest;
 use App\Infrastructure\Security\Hasher\PasswordHasherInterface;
 use App\Infrastructure\Service\Generator\IdGeneratorInterface;
 
-final class UsersFactory implements UsersFactoryInterface
+final class NullUsersFactory implements UsersFactoryInterface
 {
     private IdGeneratorInterface $generator;
 
     private PasswordHasherInterface $hasher;
 
-    private NullUsersFactory $nullFactory;
-
-    public function __construct(IdGeneratorInterface $generator, PasswordHasherInterface $hasher,
-                                NullUsersFactory $nullFactory)
+    public function __construct(IdGeneratorInterface $generator, PasswordHasherInterface $hasher)
     {
         $this->generator = $generator;
         $this->hasher = $hasher;
-        $this->nullFactory = $nullFactory;
     }
 
-    /**
-     * @throws InvalidCreatedAtException
-     * @throws InvalidEmailException
-     * @throws InvalidLocaleException
-     * @throws InvalidPasswordException
-     */
     public function fromArray(array $params): UserInterface
     {
-        if (!$params) {
-            return $this->nullFactory->fromArray($params);
-        }
-
-        return new User(
-            $this->generator->generateFromString($params['id']),
-            new Firstname($params['firstname']),
-            new Lastname($params['lastname']),
-            new Email($params['email']),
-            new Password($params['password']),
-            new CreatedAt(\DateTimeImmutable::createFromFormat(\DATE_ATOM, $params['created_at'])),
-            new Locale($params['locale'])
-        );
+        return new NullUser();
     }
 
     /**
@@ -66,11 +44,7 @@ final class UsersFactory implements UsersFactoryInterface
      */
     public function fromDTO(RegisterUserRequest $request): UserInterface
     {
-        if (!$request) {
-            return $this->nullFactory->fromDTO($request);
-        }
-
-        return User::register(
+        return NullUser::register(
             $this->generator->generate(),
             new Firstname($request->firstname()),
             new Lastname($request->lastname()),
@@ -83,18 +57,6 @@ final class UsersFactory implements UsersFactoryInterface
 
     public function toArray(UserInterface $user): array
     {
-        if (!$user) {
-            return $this->nullFactory->toArray($user);
-        }
-
-        return [
-            'id' => $user->id()->value(),
-            'firstname' => $user->firstname()->value(),
-            'lastname' => $user->lastname()->value(),
-            'email' => $user->email()->value(),
-            'password' => $user->password()->value(),
-            'created_at' => $user->createdAt()->value()->format(\DATE_ATOM),
-            'locale' => $user->locale()->value()
-        ];
+        return [];
     }
 }
