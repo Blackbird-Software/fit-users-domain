@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\Factory;
 
+use App\User\Domain\Exception\UserNotFoundException;
 use App\User\Domain\Model\User;
 use App\User\Domain\Model\UserInterface;
 use App\User\Domain\ValueObject\CreatedAt;
@@ -26,14 +27,11 @@ final class UsersFactory implements UsersFactoryInterface
 
     private PasswordHasherInterface $hasher;
 
-    private NullUsersFactory $nullFactory;
 
-    public function __construct(IdGeneratorInterface $generator, PasswordHasherInterface $hasher,
-                                NullUsersFactory $nullFactory)
+    public function __construct(IdGeneratorInterface $generator, PasswordHasherInterface $hasher)
     {
         $this->generator = $generator;
         $this->hasher = $hasher;
-        $this->nullFactory = $nullFactory;
     }
 
     /**
@@ -41,11 +39,12 @@ final class UsersFactory implements UsersFactoryInterface
      * @throws InvalidEmailException
      * @throws InvalidLocaleException
      * @throws InvalidPasswordException
+     * @throws UserNotFoundException
      */
     public function fromArray(array $params): UserInterface
     {
         if (!$params) {
-            return $this->nullFactory->fromArray($params);
+            throw new UserNotFoundException();
         }
 
         return new User(
@@ -67,10 +66,6 @@ final class UsersFactory implements UsersFactoryInterface
      */
     public function fromDTO(RegisterUserRequest $request): UserInterface
     {
-        if (!$request) {
-            return $this->nullFactory->fromDTO($request);
-        }
-
         return User::register(
             new UserId($this->generator->generate()),
             new Firstname($request->firstname()),
@@ -84,10 +79,6 @@ final class UsersFactory implements UsersFactoryInterface
 
     public function toArray(UserInterface $user): array
     {
-        if (!$user) {
-            return $this->nullFactory->toArray($user);
-        }
-
         return [
             'id' => $user->id()->value(),
             'firstname' => $user->firstname()->value(),

@@ -17,7 +17,11 @@ services:
 
     # USER
     App\User\Domain\Repository\Users: '@App\User\Infrastructure\Repository\UsersRedisRepository'
+    App\User\Infrastructure\View\UserViews: '@App\User\Infrastructure\View\Repository\UserViewsRedisRepository'
 
     App\User\Infrastructure\Security\Hasher\PasswordHasherInterface: '@App\User\Infrastructure\Security\Hasher\BcryptPasswordHasher'
+
     App\User\Infrastructure\Factory\UsersFactoryInterface: '@App\User\Infrastructure\Factory\UsersFactory'
+    App\User\Infrastructure\View\Factory\UserViewsFactoryInterface: '@App\User\Infrastructure\View\Factory\UserViewsFactory'
+
 

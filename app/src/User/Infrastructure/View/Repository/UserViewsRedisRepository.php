@@ -1,11 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\Repository;
+namespace App\User\Infrastructure\View\Repository;
 
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\UserId;
-use App\User\Infrastructure\View\UserView;
+use App\User\Infrastructure\View\Exception\UserViewNotFoundException;
+use App\User\Infrastructure\View\Factory\UserViewsFactoryInterface;
+use App\User\Infrastructure\View\Model\UserView;
 use App\User\Infrastructure\View\UserViews;
 use Predis\Client;
 
@@ -13,33 +15,47 @@ final class UserViewsRedisRepository implements UserViews
 {
     private Client $client;
 
-    public function __construct(Client $client)
+    private UserViewsFactoryInterface $factory;
+
+    public function __construct(Client $client, UserViewsFactoryInterface $factory)
     {
         $this->client = $client;
+        $this->factory = $factory;
+    }
+
+    public function contains(UserId $id): bool
+    {
+        return (bool) $this->find($id);
     }
 
     /**
      * Basically, find method can return nullable object, however, to not to deal with if statements,
      * in that case I'm going to return NullObject implementation instead.
      */
+    // @TODO reverse methods/
+    // @TODO implement NullUser?
     public function find(UserId $id): UserView
     {
-        // TODO: Implement find() method.
+        $params = $this->client->hgetall($id->value());
+
+        return $this->factory->fromArray($params);
     }
 
+    /**
+     * @throws UserViewNotFoundException
+     */
     public function get(UserId $id): UserView
     {
-        // TODO: Implement get() method.
+       if ($user = $this->find($id)) {
+          return $user;
+       }
+
+       throw new UserViewNotFoundException();
     }
 
     public function getByEmail(Email $email): UserView
     {
         // TODO: Implement getByEmail() method.
-    }
-
-    public function contains(UserId $id): bool
-    {
-        // TODO: Implement contains() method.
     }
 
     public function findAll(): array

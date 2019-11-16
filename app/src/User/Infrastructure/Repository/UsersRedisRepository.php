@@ -6,7 +6,6 @@ namespace App\User\Infrastructure\Repository;
 use App\User\Domain\Repository\Users;
 use App\User\Domain\Exception\UserNotFoundException;
 use App\User\Domain\Model\UserInterface;
-use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\Factory\UsersFactoryInterface;
 use Predis\Client;
@@ -28,15 +27,11 @@ final class UsersRedisRepository implements Users
         $this->client->hmset($user->id(), $this->factory->toArray($user));
     }
 
-//    public function contains(UserId $id): bool
-//    {
-//        return (bool) $this->find($id);
-//    }
-
     /**
      * Basically, find method can return nullable object, however, to not to deal with if statements,
      * in that case I'm going to return NullObject implementation instead.
      */
+    // @TODO reverse methods
     public function find(UserId $id): UserInterface
     {
         $params = $this->client->hgetall($id->value());
@@ -44,20 +39,15 @@ final class UsersRedisRepository implements Users
         return $this->factory->fromArray($params);
     }
 
-//    /** @throws UserNotFoundException */
-//    public function get(UserId $id): UserInterface
-//    {
-//       if ($user = $this->find($id)) {
-//          return $user;
-//       }
-//
-//       throw new UserNotFoundException();
-//    }
+    /** @throws UserNotFoundException */
+    public function get(UserId $id): UserInterface
+    {
+       if ($user = $this->find($id)) {
+          return $user;
+       }
 
-//    public function getByEmail(Email $email): UserInterface
-//    {
-//        // TODO: Implement getByEmail() method.
-//    }
+       throw new UserNotFoundException();
+    }
 
     public function remove(UserInterface $user): void
     {

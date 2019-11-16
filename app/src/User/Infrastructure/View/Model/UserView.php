@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\View;
+namespace App\User\Infrastructure\View\Model;
 
 final class UserView
 {
@@ -17,6 +17,9 @@ final class UserView
 
     private string $createdAt;
 
+    /**
+     * @throws \Exception
+     */
     public function __construct(string $id, string $email, string $firstname, string $lastname, string $locale, string $createdAt)
     {
         $this->id = $id;
@@ -24,6 +27,7 @@ final class UserView
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->locale = $locale;
+        // @TODO adjust to user's timezone
         $this->createdAt = $createdAt;
     }
 

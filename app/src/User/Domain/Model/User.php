@@ -79,23 +79,4 @@ final class User implements UserInterface
     {
         return $this->locale;
     }
-
-    public function serialize(): array
-    {
-        return [
-            'id' => $this->id()->value(),
-            'firstname' => $this->firstname()->value(),
-            'lastname' => $this->lastname()->value(),
-            'email' => $this->email()->value(),
-            'created_at' => $this->createdAt()->value()->format(\DATE_ATOM),
-            'locale' => $this->locale()->value()
-        ];
-    }
-
-    /** @throws \Exception */
-    public function unserialize($serialized): self
-    {
-        // @TODO
-        throw new \Exception('Object cannot be unserialized. ');
-    }
 }

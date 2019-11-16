@@ -7,3 +7,7 @@ services:
   repositories:
     namespace: App\User\Infrastructure\Repository\
     resource: "%kernel.project_dir%/src/User/Infrastructure/Repository/*"
+
+  view_repositories:
+    namespace: App\User\Infrastructure\View\Repository\
+    resource: "%kernel.project_dir%/src/User/Infrastructure/View/Repository/*"

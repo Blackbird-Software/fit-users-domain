@@ -11,7 +11,7 @@ use App\User\Domain\ValueObject\Locale;
 use App\User\Domain\ValueObject\Password;
 use App\User\Domain\ValueObject\UserId;
 
-interface UserInterface extends \Serializable
+interface UserInterface
 {
     public static function register(UserId $id, Firstname $firstname, Lastname $lastname, Email $email, Password $password, CreatedAt $createdAt, Locale $locale): self;
 }
