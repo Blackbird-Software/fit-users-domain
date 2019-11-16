@@ -18,10 +18,10 @@ final class UsersInMemoryRepository implements Users
         $this->users[] = $user;
     }
 
-    public function contains(UserId $id): bool
-    {
-        return (bool) $this->find($id);
-    }
+//    public function contains(UserId $id): bool
+//    {
+//        return (bool) $this->find($id);
+//    }
 
     public function find(UserId $id): UserInterface
     {
@@ -35,28 +35,28 @@ final class UsersInMemoryRepository implements Users
         return null;
     }
 
-    /** @throws UserNotFoundException */
-    public function get(UserId $id): UserInterface
-    {
-        if($user = $this->find($id)) {
-            return $user;
-        }
+//    /** @throws UserNotFoundException */
+//    public function get(UserId $id): UserInterface
+//    {
+//        if($user = $this->find($id)) {
+//            return $user;
+//        }
+//
+//        throw new UserNotFoundException();
+//    }
 
-        throw new UserNotFoundException();
-    }
-
-    /** @throws UserNotFoundException */
-    public function getByEmail(Email $email): UserInterface
-    {
-        /** @var UserInterface $user */
-        foreach ($this->users as $user) {
-            if($user->email()->value() === $email->value()) {
-                return $user;
-            }
-        }
-
-        throw new UserNotFoundException();
-    }
+//    /** @throws UserNotFoundException */
+//    public function getByEmail(Email $email): UserInterface
+//    {
+//        /** @var UserInterface $user */
+//        foreach ($this->users as $user) {
+//            if($user->email()->value() === $email->value()) {
+//                return $user;
+//            }
+//        }
+//
+//        throw new UserNotFoundException();
+//    }
 
     /** @throws UserNotFoundException */
     public function remove(UserInterface $user): void

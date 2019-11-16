@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\Service\Factory;
+namespace App\User\Infrastructure\Factory;
 
 use App\User\Domain\Model\UserInterface;
 use App\User\Infrastructure\DTO\RegisterUserRequest;

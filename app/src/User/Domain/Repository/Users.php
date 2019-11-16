@@ -11,14 +11,14 @@ interface Users
 {
     public function add(UserInterface $user): void;
 
-    public function contains(UserId $id): bool;
+   // public function contains(UserId $id): bool;
 
     // possibly could be null
     public function find(UserId $id): UserInterface;
 
-    public function get(UserId $id): UserInterface;
+    //public function get(UserId $id): UserInterface;
 
-    public function getByEmail(Email $email): UserInterface;
+    //public function getByEmail(Email $email): UserInterface;
 
     public function remove(UserInterface $user): void;
 }

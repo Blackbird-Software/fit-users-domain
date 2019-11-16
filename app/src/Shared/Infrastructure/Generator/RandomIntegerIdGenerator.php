@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\Service\Generator;
+namespace App\Shared\Infrastructure\Generator;
 
 use App\Shared\Domain\ValueObject\IdInterface;
-use App\Shared\Infrastructure\Service\RandomIntegerId;
+use App\Shared\Infrastructure\RandomIntegerId;
 
 final class RandomIntegerIdGenerator implements IdGeneratorInterface
 {

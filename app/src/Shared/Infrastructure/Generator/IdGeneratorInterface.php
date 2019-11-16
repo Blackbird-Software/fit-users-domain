@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\Service\Generator;
+namespace App\Shared\Infrastructure\Generator;
 
 use App\Shared\Domain\ValueObject\IdInterface;
 

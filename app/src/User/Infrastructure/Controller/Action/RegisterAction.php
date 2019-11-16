@@ -5,7 +5,7 @@ namespace App\User\Infrastructure\Controller\Action;
 
 use App\User\Domain\Repository\Users;
 use App\User\Infrastructure\DTO\RegisterUserRequest;
-use App\User\Infrastructure\Service\Factory\UsersFactoryInterface;
+use App\User\Infrastructure\Factory\UsersFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\Service\Factory;
+namespace App\User\Infrastructure\Factory;
 
 use App\User\Domain\Model\NullUser;
 use App\User\Domain\Model\UserInterface;
@@ -18,7 +18,7 @@ use App\User\Domain\ValueObject\Password;
 use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\DTO\RegisterUserRequest;
 use App\User\Infrastructure\Security\Hasher\PasswordHasherInterface;
-use App\Shared\Infrastructure\Service\Generator\IdGeneratorInterface;
+use App\Shared\Infrastructure\Generator\IdGeneratorInterface;
 
 final class NullUsersFactory implements UsersFactoryInterface
 {

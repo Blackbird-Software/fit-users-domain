@@ -12,8 +12,12 @@ services:
 
     Predis\Client: '@snc_redis.default'
 
+    # SHARED
+    App\Shared\Infrastructure\Generator\IdGeneratorInterface: '@App\Shared\Infrastructure\Generator\RandomIntegerIdGenerator'
+
+    # USER
     App\User\Domain\Repository\Users: '@App\User\Infrastructure\Repository\UsersRedisRepository'
-    App\Shared\Infrastructure\Service\Generator\IdGeneratorInterface: '@App\Shared\Infrastructure\Service\Generator\RandomIntegerIdGenerator'
+
     App\User\Infrastructure\Security\Hasher\PasswordHasherInterface: '@App\User\Infrastructure\Security\Hasher\BcryptPasswordHasher'
-    App\User\Infrastructure\Service\Factory\UsersFactoryInterface: '@App\User\Infrastructure\Service\Factory\UsersFactory'
+    App\User\Infrastructure\Factory\UsersFactoryInterface: '@App\User\Infrastructure\Factory\UsersFactory'
 

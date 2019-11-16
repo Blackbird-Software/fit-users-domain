@@ -5,5 +5,5 @@ services:
     public: true
 
   factories:
-    namespace: App\User\Infrastructure\Service\Factory\
-    resource: "%kernel.project_dir%/src/User/Infrastructure/Service/Factory/*"
+    namespace: App\User\Infrastructure\Factory\
+    resource: "%kernel.project_dir%/src/User/Infrastructure/Factory/*"
