@@ -7,6 +7,7 @@ use App\User\Domain\Repository\Users;
 use App\User\Domain\Exception\UserNotFoundException;
 use App\User\Domain\Model\NullUser;
 use App\Shared\Infrastructure\Service\Generator\IdGeneratorInterface;
+use App\User\Domain\ValueObject\UserId;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,9 +29,12 @@ final class GetAction
      */
     public function __invoke(Request $request): Response
     {
+        // @TODO refactor
         $id = $request->attributes->get('id');
-        $user = $this->repository->get($this->generator->generateFromString($id));
+        $stringId = $this->generator->generateFromString($id);
+        $user = $this->repository->get(new UserId($stringId));
 
+        // @TODO refactor
         if($user instanceof NullUser) {
             throw new UserNotFoundException();
         }

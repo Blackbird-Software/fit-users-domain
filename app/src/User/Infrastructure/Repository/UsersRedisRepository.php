@@ -7,7 +7,7 @@ use App\User\Domain\Repository\Users;
 use App\User\Domain\Exception\UserNotFoundException;
 use App\User\Domain\Model\UserInterface;
 use App\User\Domain\ValueObject\Email;
-use App\Shared\Domain\ValueObject\IdInterface;
+use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\Service\Factory\UsersFactoryInterface;
 use Predis\Client;
 
@@ -28,7 +28,7 @@ final class UsersRedisRepository implements Users
         $this->client->hmset($user->id(), $this->factory->toArray($user));
     }
 
-    public function contains(IdInterface $id): bool
+    public function contains(UserId $id): bool
     {
         return (bool) $this->find($id);
     }
@@ -37,7 +37,7 @@ final class UsersRedisRepository implements Users
      * Basically, find method can return nullable object, however, to not to deal with if statements,
      * in that case I'm going to return NullObject implementation instead.
      */
-    public function find(IdInterface $id): UserInterface
+    public function find(UserId $id): UserInterface
     {
         $params = $this->client->hgetall($id->value());
 
@@ -45,7 +45,7 @@ final class UsersRedisRepository implements Users
     }
 
     /** @throws UserNotFoundException */
-    public function get(IdInterface $id): UserInterface
+    public function get(UserId $id): UserInterface
     {
        if ($user = $this->find($id)) {
           return $user;

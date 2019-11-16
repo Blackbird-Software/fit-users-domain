@@ -15,6 +15,7 @@ use App\User\Domain\ValueObject\Firstname;
 use App\User\Domain\ValueObject\Lastname;
 use App\User\Domain\ValueObject\Locale;
 use App\User\Domain\ValueObject\Password;
+use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\DTO\RegisterUserRequest;
 use App\User\Infrastructure\Security\Hasher\PasswordHasherInterface;
 use App\Shared\Infrastructure\Service\Generator\IdGeneratorInterface;
@@ -48,7 +49,7 @@ final class UsersFactory implements UsersFactoryInterface
         }
 
         return new User(
-            $this->generator->generateFromString($params['id']),
+            new UserId($this->generator->generateFromString($params['id'])),
             new Firstname($params['firstname']),
             new Lastname($params['lastname']),
             new Email($params['email']),
@@ -71,7 +72,7 @@ final class UsersFactory implements UsersFactoryInterface
         }
 
         return User::register(
-            $this->generator->generate(),
+            new UserId($this->generator->generate()),
             new Firstname($request->firstname()),
             new Lastname($request->lastname()),
             new Email($request->email()),

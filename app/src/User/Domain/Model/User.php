@@ -6,14 +6,14 @@ namespace App\User\Domain\Model;
 use App\User\Domain\ValueObject\CreatedAt;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\Firstname;
-use App\Shared\Domain\ValueObject\IdInterface;
 use App\User\Domain\ValueObject\Lastname;
 use App\User\Domain\ValueObject\Locale;
 use App\User\Domain\ValueObject\Password;
+use App\User\Domain\ValueObject\UserId;
 
 final class User implements UserInterface
 {
-    private IdInterface $id;
+    private UserId $id;
 
     private Firstname $firstname;
 
@@ -27,7 +27,7 @@ final class User implements UserInterface
 
     private Locale $locale;
 
-    public function __construct(IdInterface $id, Firstname $firstname, Lastname $lastname, Email $email, Password $password,
+    public function __construct(UserId $id, Firstname $firstname, Lastname $lastname, Email $email, Password $password,
                                  CreatedAt $createdAt, Locale $locale)
     {
         $this->id = $id;
@@ -39,13 +39,13 @@ final class User implements UserInterface
         $this->locale = $locale;
     }
 
-    public static function register(IdInterface $id, Firstname $firstname, Lastname $lastname, Email $email, Password $password,
+    public static function register(UserId $id, Firstname $firstname, Lastname $lastname, Email $email, Password $password,
                                     CreatedAt $createdAt, Locale $locale): self
     {
         return new self($id, $firstname, $lastname, $email, $password, $createdAt, $locale);
     }
 
-    public function id(): IdInterface
+    public function id(): UserId
     {
         return $this->id;
     }

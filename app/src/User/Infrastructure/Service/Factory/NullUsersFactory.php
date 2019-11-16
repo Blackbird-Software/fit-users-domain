@@ -15,6 +15,7 @@ use App\User\Domain\ValueObject\Firstname;
 use App\User\Domain\ValueObject\Lastname;
 use App\User\Domain\ValueObject\Locale;
 use App\User\Domain\ValueObject\Password;
+use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\DTO\RegisterUserRequest;
 use App\User\Infrastructure\Security\Hasher\PasswordHasherInterface;
 use App\Shared\Infrastructure\Service\Generator\IdGeneratorInterface;
@@ -45,7 +46,7 @@ final class NullUsersFactory implements UsersFactoryInterface
     public function fromDTO(RegisterUserRequest $request): UserInterface
     {
         return NullUser::register(
-            $this->generator->generate(),
+            new UserId($this->generator->generate()),
             new Firstname($request->firstname()),
             new Lastname($request->lastname()),
             new Email($request->email()),

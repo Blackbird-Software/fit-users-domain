@@ -7,7 +7,7 @@ use App\User\Domain\Repository\Users;
 use App\User\Domain\Exception\UserNotFoundException;
 use App\User\Domain\Model\UserInterface;
 use App\User\Domain\ValueObject\Email;
-use App\Shared\Domain\ValueObject\IdInterface;
+use App\User\Domain\ValueObject\UserId;
 
 final class UsersInMemoryRepository implements Users
 {
@@ -18,12 +18,12 @@ final class UsersInMemoryRepository implements Users
         $this->users[] = $user;
     }
 
-    public function contains(IdInterface $id): bool
+    public function contains(UserId $id): bool
     {
         return (bool) $this->find($id);
     }
 
-    public function find(IdInterface $id): UserInterface
+    public function find(UserId $id): UserInterface
     {
         /** @var UserInterface $user */
         foreach ($this->users as $user) {
@@ -36,7 +36,7 @@ final class UsersInMemoryRepository implements Users
     }
 
     /** @throws UserNotFoundException */
-    public function get(IdInterface $id): UserInterface
+    public function get(UserId $id): UserInterface
     {
         if($user = $this->find($id)) {
             return $user;
