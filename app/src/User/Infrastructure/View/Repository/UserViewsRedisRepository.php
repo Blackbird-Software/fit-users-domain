@@ -57,9 +57,21 @@ final class UserViewsRedisRepository implements UserViews
        throw new UserViewNotFoundException();
     }
 
+    /**
+     * @throws UserViewNotFoundException
+     */
     public function getByEmail(Email $email): UserView
     {
-        // TODO: Implement getByEmail() method.
+        $keys = $this->client->keys('*');
+
+        foreach ($keys as $key) {
+            $user = $this->client->hgetall($key);
+            if($user['email'] === $email->value()) {
+                return $this->factory->fromArray($user);
+            }
+        }
+
+        throw new UserViewNotFoundException();
     }
 
     public function findAll(): array

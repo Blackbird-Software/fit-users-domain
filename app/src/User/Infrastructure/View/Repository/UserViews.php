@@ -10,7 +10,6 @@ use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\View\Exception\UserViewNotFoundException;
 use App\User\Infrastructure\View\Model\UserView;
 
-// @TODO move to repository
 interface UserViews
 {
     public function contains(UserId $id): bool;
@@ -23,6 +22,9 @@ interface UserViews
      */
     public function get(UserId $id): UserView;
 
+    /**
+     * @throws UserViewNotFoundException
+     */
     public function getByEmail(Email $email): UserView;
 
     public function findAll(): array;

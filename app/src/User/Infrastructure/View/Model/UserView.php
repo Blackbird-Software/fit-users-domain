@@ -7,38 +7,33 @@ final class UserView
 {
     private string $id;
 
-    private string $email;
-
     private string $firstname;
 
     private string $lastname;
 
-    private string $locale;
+    private string $email;
 
     private string $createdAt;
+
+    private string $locale;
 
     /**
      * @throws \Exception
      */
-    public function __construct(string $id, string $email, string $firstname, string $lastname, string $locale, string $createdAt)
+    public function __construct(string $id, string $firstname, string $lastname, string $email, string $createdAt, string $locale)
     {
         $this->id = $id;
-        $this->email = $email;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
+        $this->email = $email;
+        $this->createdAt = $createdAt;
         $this->locale = $locale;
         // @TODO adjust to user's timezone
-        $this->createdAt = $createdAt;
     }
 
     public function id(): string
     {
         return $this->id;
-    }
-
-    public function email(): string
-    {
-        return $this->email;
     }
 
     public function firstname(): string
@@ -51,13 +46,18 @@ final class UserView
         return $this->lastname;
     }
 
-    public function locale(): string
+    public function email(): string
     {
-        return $this->locale;
+        return $this->email;
     }
 
     public function createdAt(): string
     {
         return $this->createdAt;
+    }
+
+    public function locale(): string
+    {
+        return $this->locale;
     }
 }
