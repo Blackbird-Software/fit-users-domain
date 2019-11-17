@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  command_buses:
+    namespace: App\User\Application\CommandBus\
+    resource: "%kernel.project_dir%/src/User/Application/CommandBus/*"

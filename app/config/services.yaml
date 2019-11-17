@@ -24,4 +24,6 @@ services:
     App\User\Infrastructure\Factory\UsersFactoryInterface: '@App\User\Infrastructure\Factory\UsersFactory'
     App\User\Infrastructure\ReadModel\Factory\UserViewsFactoryInterface: '@App\User\Infrastructure\ReadModel\Factory\UserViewsFactory'
 
+    App\Shared\Application\CommandBusInterface: '@App\User\Application\CommandBus\SimpleCommandBus'
+
 

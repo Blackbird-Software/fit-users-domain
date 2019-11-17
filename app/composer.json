@@ -5,6 +5,7 @@
         "php": "^7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "beberlei/assert": "^3.2",
         "marc-mabe/php-enum": "^4.1",
         "predis/predis": "^1.1",
         "symfony/console": "4.3.*",
