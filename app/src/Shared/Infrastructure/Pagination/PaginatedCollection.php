@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Pagination;
 
@@ -12,7 +13,6 @@ final class PaginatedCollection implements PaginatedCollectionInterface
 
     private array $_links = [];
 
-    // \Traversable?
     public function __construct(\Traversable $items, int $totalItems)
     {
         $this->items = iterator_to_array($items);

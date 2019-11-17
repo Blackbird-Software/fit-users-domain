@@ -6,12 +6,12 @@ namespace App\User\Infrastructure\Pagination;
 
 use App\Shared\Infrastructure\Pagination\PaginatedCollection;
 use App\Shared\Infrastructure\Pagination\PaginatedCollectionInterface;
+use App\Shared\Infrastructure\Pagination\PaginationFactory;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Routing\RouterInterface;
 
-// @TODO create an interface!
-final class RedisPaginationFactory
+final class RedisPaginationFactory implements PaginationFactory
 {
     public const DEFAULT_PER_PAGE = 25;
 
@@ -24,23 +24,17 @@ final class RedisPaginationFactory
         $this->router = $router;
     }
 
-    public function createCollection(
-        array $items,
-        array $params,
-        $route,
-        array $routeParams = []
-    ): PaginatedCollectionInterface
+    public function createCollection($source, array $params, string $route, array $routeParams = []): PaginatedCollectionInterface
     {
         $page = $params['page'] ?? self::DEFAULT_PAGE;
         $perPage = $params['per_page'] ?? self::DEFAULT_PER_PAGE;
 
-        $adapter = new ArrayAdapter($items);
+        $adapter = new ArrayAdapter($source);
         $pagerfanta = new Pagerfanta($adapter);
 
         $pagerfanta->setMaxPerPage($perPage);
         $pagerfanta->setCurrentPage($page);
 
-        // @TODO refactor, get rid of \Traversable?
         $paginatedCollection = new PaginatedCollection(
             new \ArrayIterator($pagerfanta->getCurrentPageResults()),
             $pagerfanta->getNbResults()
