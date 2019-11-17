@@ -27,6 +27,7 @@ interface UserViews
      */
     public function getByEmail(Email $email): UserView;
 
+    // @TODO add criteria
     public function findAll(): array;
 
     public function getPaginatedCollection(array $params): PaginatedCollectionInterface;
