@@ -1,8 +1,27 @@
 <?php
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\View\Model;
+namespace App\User\Infrastructure\ReadModel\View;
+use Hateoas\Configuration\Annotation as Hateoas;
 
+/**
+ * @Hateoas\Relation(
+ *      "self",
+ *      href=@Hateoas\Route(
+ *          "api_fetch_user",
+ *          parameters={"id"="expr(object.id())"}
+ *      ),
+ *      attributes={"method": "GET"}
+ * )
+ * @Hateoas\Relation(
+ *      "delete",
+ *      href=@Hateoas\Route(
+ *          "api_remove_user",
+ *          parameters={"id"="expr(object.id())"}
+ *      ),
+ *      attributes={"method": "DELETE"}
+ * )
+ */
 final class UserView
 {
     private string $id;

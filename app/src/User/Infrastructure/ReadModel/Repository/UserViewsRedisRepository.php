@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\View\Repository;
+namespace App\User\Infrastructure\ReadModel\Repository;
 
 use App\Shared\Infrastructure\Pagination\PaginatedCollectionInterface;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\Pagination\RedisPaginationFactory;
-use App\User\Infrastructure\View\Exception\UserViewNotFoundException;
-use App\User\Infrastructure\View\Factory\UserViewsFactoryInterface;
-use App\User\Infrastructure\View\Model\UserView;
+use App\User\Infrastructure\ReadModel\Exception\UserViewNotFoundException;
+use App\User\Infrastructure\ReadModel\Factory\UserViewsFactoryInterface;
+use App\User\Infrastructure\ReadModel\View\UserView;
 use Predis\Client;
 
 final class UserViewsRedisRepository implements UserViews

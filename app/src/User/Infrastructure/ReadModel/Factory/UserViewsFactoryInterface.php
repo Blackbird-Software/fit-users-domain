@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\View\Factory;
+namespace App\User\Infrastructure\ReadModel\Factory;
 
-use App\User\Infrastructure\View\Model\UserView;
+use App\User\Infrastructure\ReadModel\View\UserView;
 
 interface UserViewsFactoryInterface
 {
