@@ -20,7 +20,7 @@ final class UserId implements ValueObjectInterface
         return (string) $this->value;
     }
 
-    public function value()
+    public function value(): string
     {
        return $this->value;
     }

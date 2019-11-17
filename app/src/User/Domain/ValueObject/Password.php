@@ -9,8 +9,6 @@ use App\User\Domain\ValueObject\Validator\PasswordValidator;
 
 final class Password extends AbstractValueObject
 {
-    public const PASSWORD_MIN_CHARS = 8;
-
     /** @throws InvalidPasswordException */
     public function __construct(string $value)
     {
