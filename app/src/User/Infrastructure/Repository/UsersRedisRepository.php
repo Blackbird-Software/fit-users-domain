@@ -24,12 +24,12 @@ final class UsersRedisRepository implements Users
 
     public function add(UserInterface $user): void
     {
-        $this->client->hmset($user->id(), $this->factory->toArray($user));
+        $this->set($user->id(), $this->factory->toArray($user));
     }
 
     public function update(UserInterface $user): void
     {
-        $this->client->hmset($user->id(), $this->factory->toArray($user));
+        $this->set($user->id(), $this->factory->toArray($user));
     }
 
     /**
@@ -54,8 +54,14 @@ final class UsersRedisRepository implements Users
        throw new UserNotFoundException();
     }
 
+    // @TODO id not in the interface?
     public function remove(UserInterface $user): void
     {
        $this->client->del($user->id()->value());
+    }
+
+    private function set(UserId $id, array $userData): void
+    {
+        $this->client->hmset($id, $userData);
     }
 }
