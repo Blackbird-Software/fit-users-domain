@@ -6,6 +6,7 @@ namespace App\User\Infrastructure\Repository;
 use App\User\Domain\Repository\Users;
 use App\User\Domain\Exception\UserNotFoundException;
 use App\User\Domain\Model\UserInterface;
+use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\Factory\UsersFactoryInterface;
 use Predis\Client;
@@ -52,6 +53,23 @@ final class UsersRedisRepository implements Users
        }
 
        throw new UserNotFoundException();
+    }
+
+    /**
+     * @throws UserNotFoundException
+     */
+    public function getByEmail(Email $email): UserInterface
+    {
+        $keys = $this->client->keys('*');
+
+        foreach ($keys as $key) {
+            $user = $this->client->hgetall($key);
+            if($user['email'] === $email->value()) {
+                return $this->factory->fromArray($user);
+            }
+        }
+
+        throw new UserNotFoundException();
     }
 
     // @TODO id not in the interface?

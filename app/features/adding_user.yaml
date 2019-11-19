@@ -1,0 +1,10 @@
+  @user @api
+  Feature: Adding an user
+    In order to use the application
+    As a regular user
+    I want to register first
+
+    @application
+    Scenario: Registering a new user
+      When I register a new user with e-mail test@wow.pl
+      Then the user test@wow.pl should be recorded on the list

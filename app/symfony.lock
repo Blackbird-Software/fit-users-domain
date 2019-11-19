@@ -50,6 +50,9 @@
             "tests/Behat/DemoContext.php"
         ]
     },
+    "friends-of-behat/variadic-extension": {
+        "version": "v1.2.0"
+    },
     "friendsofsymfony/rest-bundle": {
         "version": "2.2",
         "recipe": {

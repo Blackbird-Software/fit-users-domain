@@ -1,0 +1,8 @@
+default:
+  suites:
+    user_application_features:
+      contexts_services:
+        - 'tests.behat.context.application.user_context'
+        - 'tests.behat.context.hook.redis_context'
+      filters:
+        tags: '@user && @application'

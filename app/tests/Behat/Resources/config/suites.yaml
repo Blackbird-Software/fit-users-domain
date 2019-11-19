@@ -1,0 +1,3 @@
+imports:
+  - 'suites/application/user.yaml'
+  - 'suites/api/user.yaml'

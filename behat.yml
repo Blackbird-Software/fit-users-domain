@@ -1,0 +1,14 @@
+imports:
+  - 'tests/Behat/Resources/config/suites.yml'
+
+default:
+  extensions:
+    FriendsOfBehat\VariadicExtension: ~
+    FriendsOfBehat\SymfonyExtension:
+      kernel:
+        bootstrap: 'vendor/autoload.php'
+        path: 'src/Shared/Infrastructure/Kernel.php'
+        class: 'App\Shared\Infrastructure\Kernel'
+    FriendsOfBehat\ContextServiceExtension:
+      imports:
+        - 'tests/Behat/Resources/config/services.xml'
