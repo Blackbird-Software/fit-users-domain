@@ -25,6 +25,7 @@ services:
     App\User\Infrastructure\ReadModel\Factory\UserViewsFactoryInterface: '@App\User\Infrastructure\ReadModel\Factory\UserViewsFactory'
 
     App\Shared\Application\CommandBusInterface: '@App\User\Application\CommandBus\SimpleCommandBus'
+
     # @TODO make na interface!
     App\Shared\Infrastructure\Api\ResponseFactory:
         class: App\Shared\Infrastructure\Api\ResponseFactory
