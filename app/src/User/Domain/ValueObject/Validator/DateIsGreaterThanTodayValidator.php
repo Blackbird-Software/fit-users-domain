@@ -5,7 +5,7 @@ namespace App\User\Domain\ValueObject\Validator;
 
 use App\Shared\Domain\ValueObject\Validator\ValidatorInterface;
 
-final class CreatedAtValidator implements ValidatorInterface
+final class DateIsGreaterThanTodayValidator implements ValidatorInterface
 {
     public function isValid($value): bool
     {

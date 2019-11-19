@@ -10,6 +10,8 @@ interface Users
 {
     public function add(UserInterface $user): void;
 
+    public function update(UserInterface $user): void;
+
     // possibly could be null
     public function find(UserId $id): UserInterface;
 

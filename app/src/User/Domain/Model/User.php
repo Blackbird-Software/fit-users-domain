@@ -9,6 +9,7 @@ use App\User\Domain\ValueObject\Firstname;
 use App\User\Domain\ValueObject\Lastname;
 use App\User\Domain\ValueObject\Locale;
 use App\User\Domain\ValueObject\Password;
+use App\User\Domain\ValueObject\UpdatedAt;
 use App\User\Domain\ValueObject\UserId;
 
 final class User implements UserInterface
@@ -25,6 +26,8 @@ final class User implements UserInterface
 
     private CreatedAt $createdAt;
 
+    private ?UpdatedAt $updatedAt;
+
     private Locale $locale;
 
     public function __construct(UserId $id, Firstname $firstname, Lastname $lastname, Email $email, Password $password,
@@ -40,9 +43,17 @@ final class User implements UserInterface
     }
 
     public static function register(UserId $id, Firstname $firstname, Lastname $lastname, Email $email, Password $password,
-                                    CreatedAt $createdAt, Locale $locale): self
+                                    CreatedAt $createdAt, Locale $locale): UserInterface
     {
         return new self($id, $firstname, $lastname, $email, $password, $createdAt, $locale);
+    }
+
+    public function update(Firstname $firstname, Lastname $lastname, Locale $locale, UpdatedAt $updatedAt): void
+    {
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+        $this->locale = $locale;
+        $this->updatedAt = $updatedAt;
     }
 
     public function id(): UserId
@@ -78,5 +89,10 @@ final class User implements UserInterface
     public function locale(): Locale
     {
         return $this->locale;
+    }
+
+    public function updatedAt(): ?UpdatedAt
+    {
+        return $this->updatedAt;
     }
 }

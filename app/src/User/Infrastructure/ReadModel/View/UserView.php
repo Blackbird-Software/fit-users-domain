@@ -21,6 +21,14 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *      ),
  *      attributes={"method": "DELETE"}
  * )
+ * @Hateoas\Relation(
+ *      "update",
+ *      href=@Hateoas\Route(
+ *          "api_update_user",
+ *          parameters={"id"="expr(object.id())"}
+ *      ),
+ *      attributes={"method": "PUT"}
+ * )
  */
 final class UserView
 {

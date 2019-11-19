@@ -9,9 +9,12 @@ use App\User\Domain\ValueObject\Firstname;
 use App\User\Domain\ValueObject\Lastname;
 use App\User\Domain\ValueObject\Locale;
 use App\User\Domain\ValueObject\Password;
+use App\User\Domain\ValueObject\UpdatedAt;
 use App\User\Domain\ValueObject\UserId;
 
 interface UserInterface
 {
     public static function register(UserId $id, Firstname $firstname, Lastname $lastname, Email $email, Password $password, CreatedAt $createdAt, Locale $locale): self;
+
+    public function update(Firstname $firstname, Lastname $lastname, Locale $locale, UpdatedAt $updatedAt): void;
 }

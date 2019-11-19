@@ -25,3 +25,11 @@ remove_user:
     _controller: 'App\User\Infrastructure\Controller\Action\RemoveAction'
   requirements:
     id: '\d+'
+
+update_user:
+  path: '/users/{id}'
+  methods: ['PUT']
+  defaults:
+    _controller: 'App\User\Infrastructure\Controller\Action\UpdateAction'
+  requirements:
+    id: '\d+'

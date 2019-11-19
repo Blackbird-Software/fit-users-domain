@@ -27,6 +27,11 @@ final class UsersRedisRepository implements Users
         $this->client->hmset($user->id(), $this->factory->toArray($user));
     }
 
+    public function update(UserInterface $user): void
+    {
+        $this->client->hmset($user->id(), $this->factory->toArray($user));
+    }
+
     /**
      * Basically, find method can return nullable object, however, to not to deal with if statements,
      * in that case I'm going to return NullObject implementation instead.

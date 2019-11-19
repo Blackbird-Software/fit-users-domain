@@ -18,6 +18,7 @@ use App\User\Domain\ValueObject\Locale;
 use App\User\Domain\ValueObject\Password;
 use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\DTO\RegisterUserRequest;
+use App\User\Infrastructure\DTO\UpdateUserRequest;
 use App\User\Infrastructure\Security\Hasher\PasswordHasherInterface;
 use App\Shared\Infrastructure\Generator\IdGeneratorInterface;
 
@@ -59,10 +60,7 @@ final class UsersFactory implements UsersFactoryInterface
     }
 
     /**
-     * @throws InvalidCreatedAtException
-     * @throws InvalidEmailException
-     * @throws InvalidLocaleException
-     * @throws InvalidPasswordException
+     * @throws \Exception
      */
     public function fromDTO(RegisterUserRequest $request): UserInterface
     {

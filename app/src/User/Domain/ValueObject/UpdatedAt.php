@@ -5,9 +5,10 @@ namespace App\User\Domain\ValueObject;
 
 use App\Shared\Domain\ValueObject\ValueObjectInterface;
 use App\User\Domain\ValueObject\Exception\InvalidCreatedAtException;
+use App\User\Domain\ValueObject\Exception\InvalidUpdatedAtException;
 use App\User\Domain\ValueObject\Validator\DateIsGreaterThanTodayValidator;
 
-final class CreatedAt implements ValueObjectInterface
+final class UpdatedAt implements ValueObjectInterface
 {
     private \DateTimeImmutable $value;
 
@@ -17,7 +18,7 @@ final class CreatedAt implements ValueObjectInterface
         $validator = new DateIsGreaterThanTodayValidator();
 
         if(!($validator->isValid($value))) {
-            throw new InvalidCreatedAtException();
+            throw new InvalidUpdatedAtException();
         }
 
         $this->value = $value;
@@ -28,7 +29,7 @@ final class CreatedAt implements ValueObjectInterface
         return $this->value()->format(\DATE_ATOM);
     }
 
-    public function value(): \DateTimeImmutable
+    public function value(): ?\DateTimeImmutable
     {
         return $this->value;
     }
