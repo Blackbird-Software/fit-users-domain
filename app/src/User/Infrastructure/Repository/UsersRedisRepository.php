@@ -6,6 +6,7 @@ namespace App\User\Infrastructure\Repository;
 use App\User\Domain\Repository\Users;
 use App\User\Domain\Exception\UserNotFoundException;
 use App\User\Domain\Model\UserInterface;
+use App\User\Domain\UserWasRegistered;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\Factory\UsersFactoryInterface;
