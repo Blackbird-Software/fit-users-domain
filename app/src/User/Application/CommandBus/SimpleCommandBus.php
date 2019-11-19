@@ -29,8 +29,8 @@ final class SimpleCommandBus implements CommandBusInterface
      */
     public function dispatch(CommandInterface $command): void
     {
-        Assertion::keyExists($this->handlers, get_class($command));
+        Assertion::keyExists($this->handlers, \get_class($command));
 
-        $this->handlers[get_class($command)]->handle($command);
+        $this->handlers[\get_class($command)]->handle($command);
     }
 }

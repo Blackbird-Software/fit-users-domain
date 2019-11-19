@@ -1,0 +1,12 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  App\User\Infrastructure\Validator\UserHasBeenAlreadyRegisteredValidator:
+    class: App\User\Infrastructure\Validator\UserHasBeenAlreadyRegisteredValidator
+    arguments: ['@App\User\Infrastructure\ReadModel\Repository\UserViews']
+    lazy: true
+    tags:
+      - { name: validator.constraint_validator }

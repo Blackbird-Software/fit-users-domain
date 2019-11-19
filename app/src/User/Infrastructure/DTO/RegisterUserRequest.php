@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\User\Infrastructure\DTO;
 
 use App\Shared\Infrastructure\DTO\RequestDTOInterface;
+use App\User\Infrastructure\Validator\Constraints\UserHasBeenAlreadyRegistered;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\User\Domain\Enum\LocaleEnum;
@@ -24,6 +25,7 @@ final class RegisterUserRequest implements RequestDTOInterface
     /**
      * @Assert\NotBlank
      * @Assert\Email
+     * @UserHasBeenAlreadyRegistered
      */
     private $email;
 

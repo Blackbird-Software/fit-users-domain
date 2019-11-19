@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  event_subscribers:
+    namespace: App\Shared\Infrastructure\EventSubscriber\
+    resource: "%kernel.project_dir%/src/Shared/Infrastructure/EventSubscriber/*"
