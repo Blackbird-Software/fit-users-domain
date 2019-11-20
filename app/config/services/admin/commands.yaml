@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  admin_ui_commands:
+    namespace: App\Admin\UI\Command\
+    resource: "%kernel.project_dir%/src/Admin/UI/Command/*"

@@ -4,6 +4,6 @@ services:
     autoconfigure: true
     public: true
 
-  hashers:
+  password_hashers:
     namespace: App\User\Infrastructure\Security\Hasher\
     resource: "%kernel.project_dir%/src/User/Infrastructure/Security/Hasher/*"

@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace App\Shared\Application\Message;
 
-use App\Shared\Domain\Event\DomainEvent;
+use App\Shared\Domain\Event\AggregateChanged;
 
 final class CollectedMessage
 {
-    private DomainEvent $event;
+    private AggregateChanged $event;
 
     private bool $handled;
 
-    public function __construct(DomainEvent $event, bool $handled)
+    public function __construct(AggregateChanged $event, bool $handled)
     {
         $this->event = $event;
         $this->handled = $handled;
     }
 
-    public function event(): DomainEvent
+    public function event(): AggregateChanged
     {
         return $this->event;
     }

@@ -4,10 +4,10 @@ services:
     autoconfigure: true
     public: true
 
-  repositories:
+  user_repositories:
     namespace: App\User\Infrastructure\Repository\
     resource: "%kernel.project_dir%/src/User/Infrastructure/Repository/*"
 
-  view_repositories:
+  user_view_repositories:
     namespace: App\User\Infrastructure\ReadModel\Repository\
     resource: "%kernel.project_dir%/src/User/Infrastructure/ReadModel/Repository/*"

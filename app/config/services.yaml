@@ -14,6 +14,7 @@ services:
 
     # SHARED
     App\Shared\Infrastructure\Generator\IdGeneratorInterface: '@App\Shared\Infrastructure\Generator\RandomIntegerIdGenerator'
+    App\Shared\Infrastructure\EventStore\EventStore: '@App\Shared\Infrastructure\EventStore\RedisEventStore'
 
     # USER
     App\User\Domain\Repository\Users: '@App\User\Infrastructure\Repository\UsersRedisRepository'
@@ -25,6 +26,9 @@ services:
     App\User\Infrastructure\ReadModel\Factory\UserViewsFactoryInterface: '@App\User\Infrastructure\ReadModel\Factory\UserViewsFactory'
 
     App\Shared\Application\CommandBusInterface: '@App\User\Application\CommandBus\SimpleCommandBus'
+
+    # ADMIN
+    App\Admin\Domain\Repository\Admins: '@App\Admin\Infrastructure\Repository\EventSourcedAdminRepository'
 
     # @TODO make na interface!
     App\Shared\Infrastructure\Api\ResponseFactory:

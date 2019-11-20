@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  event_stores:
+    namespace: App\Shared\Infrastructure\EventStore\
+    resource: "%kernel.project_dir%/src/Shared/Infrastructure/EventStore/*"

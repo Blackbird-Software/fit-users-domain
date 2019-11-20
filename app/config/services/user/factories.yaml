@@ -4,10 +4,10 @@ services:
     autoconfigure: true
     public: true
 
-  factories:
+  user_factories:
     namespace: App\User\Infrastructure\Factory\
     resource: "%kernel.project_dir%/src/User/Infrastructure/Factory/*"
 
-  view_factories:
+  user_view_factories:
     namespace: App\User\Infrastructure\ReadModel\Factory\
     resource: "%kernel.project_dir%/src/User/Infrastructure/ReadModel/Factory/*"
