@@ -9,6 +9,7 @@ use Predis\Client;
 
 final class RedisEventStore implements EventStore
 {
+    private const MAIN_KEY = 'event_streams';
     private Client $client;
 
     public function __construct(Client $client)
@@ -18,12 +19,16 @@ final class RedisEventStore implements EventStore
 
     public function save(AggregateChanged $event)
     {
-        $this->client->hmset('xyz', [
+        $idx  = $this->client->scard(self::MAIN_KEY);
+        $tmpKey = sprintf('event_%d', $idx);
+
+        $this->client->hmset($tmpKey, [
             'aggregate_id' => $event->aggregateId(),
             'event' => json_encode($event),
             'version' => $event->version()
         ]);
-        $this->client->sadd('event_store', $this->client->hgetall('xyz'));
+
+        $this->client->sadd(self::MAIN_KEY, [$tmpKey]);
     }
 
     public function findEvents($aggregateId)
