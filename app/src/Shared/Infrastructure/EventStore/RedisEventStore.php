@@ -18,7 +18,7 @@ final class RedisEventStore implements EventStore
         $this->client = $client;
     }
 
-    public function save(AggregateChanged $event)
+    public function save(AggregateChanged $event): void
     {
         $idx  = $this->client->scard(self::MAIN_KEY);
         $tmpKey = sprintf('event_%d', $idx);

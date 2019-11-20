@@ -8,7 +8,7 @@ use App\Shared\Domain\Event\AggregateChanged;
 
 interface EventStore
 {
-    public function save(AggregateChanged $event);
+    public function save(AggregateChanged $event): void;
 
     public function findEvents($aggregateId);
 }
