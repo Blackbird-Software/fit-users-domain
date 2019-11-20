@@ -10,6 +10,7 @@ use Predis\Client;
 final class RedisEventStore implements EventStore
 {
     private const MAIN_KEY = 'event_streams';
+
     private Client $client;
 
     public function __construct(Client $client)
