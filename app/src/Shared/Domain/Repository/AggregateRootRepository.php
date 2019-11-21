@@ -6,7 +6,6 @@ namespace App\Shared\Domain\Repository;
 
 use App\Admin\Domain\Event\EventTypeLocator;
 use App\Admin\Domain\Model\Admin;
-use App\Shared\Domain\Event\AggregateChanged;
 use App\Shared\Domain\Model\AggregateRoot;
 use App\Shared\Infrastructure\EventStore\EventStore;
 
@@ -43,15 +42,21 @@ abstract class AggregateRootRepository
         $object = $reflection->newInstanceWithoutConstructor();
 
         foreach ($events as $eventMessage) {
-            // @TODO list extractor
-            $eventClass = EventTypeLocator::getClassNameByKey($eventMessage['event_type']);
+            [
+                'event' => $event,
+                'event_type' => $eventType,
+                'version' => $version
+            ] = $eventMessage;
+
+            $eventClass = EventTypeLocator::getClassNameByKey($eventType);
             $eventReflection = new \ReflectionClass($eventClass);
-            $payload = json_decode($eventMessage['event'], true);
+            $payload = json_decode($event, true);
+
             $event = $eventReflection->newInstance(
-                $eventMessage['aggregate_id'],
+                $aggregateId,
                 $payload
             );
-            $event = $event->withVersion((int) $eventMessage['version']);
+            $event = $event->withVersion((int) $version);
             $object->apply($event);
         }
 
