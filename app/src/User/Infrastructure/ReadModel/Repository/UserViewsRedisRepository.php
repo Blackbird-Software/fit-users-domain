@@ -14,6 +14,8 @@ use Predis\Client;
 
 final class UserViewsRedisRepository implements UserViews
 {
+    private const RECORD_PATTERN = 'user:';
+
     private Client $client;
 
     private UserViewsFactoryInterface $factory;
@@ -40,7 +42,9 @@ final class UserViewsRedisRepository implements UserViews
     // @TODO implement NullUser?
     public function find(UserId $id): UserView
     {
-        $params = $this->client->hgetall($id->value());
+        $params = $this->client->hgetall(
+            $this->keyPattern($id)
+        );
 
         return $this->factory->fromArray($params);
     }
@@ -62,7 +66,9 @@ final class UserViewsRedisRepository implements UserViews
      */
     public function getByEmail(Email $email): UserView
     {
-        $keys = $this->client->keys('*');
+        $keys = $this->client->keys(
+            sprintf('%s*', self::RECORD_PATTERN)
+        );
 
         foreach ($keys as $key) {
             $user = $this->client->hgetall($key);
@@ -77,7 +83,9 @@ final class UserViewsRedisRepository implements UserViews
     public function findAll(): array
     {
         $users = [];
-        $keys = $this->client->keys('*');
+        $keys = $this->client->keys(
+            sprintf('%s*', self::RECORD_PATTERN)
+        );
 
         foreach ($keys as $key) {
            $user = $this->client->hgetall($key);
@@ -99,5 +107,10 @@ final class UserViewsRedisRepository implements UserViews
             $params,
             $route
         );
+    }
+
+    private function keyPattern(UserId $id): string
+    {
+        return sprintf('%s%s', self::RECORD_PATTERN, $id->value());
     }
 }

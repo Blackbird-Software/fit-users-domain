@@ -6,7 +6,6 @@ namespace App\User\Infrastructure\Repository;
 use App\User\Domain\Repository\Users;
 use App\User\Domain\Exception\UserNotFoundException;
 use App\User\Domain\Model\UserInterface;
-use App\User\Domain\UserWasRegistered;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\Factory\UsersFactoryInterface;
@@ -14,6 +13,8 @@ use Predis\Client;
 
 final class UsersRedisRepository implements Users
 {
+    private const RECORD_PATTERN = 'user:';
+
     private Client $client;
 
     private UsersFactoryInterface $factory;
@@ -26,12 +27,18 @@ final class UsersRedisRepository implements Users
 
     public function add(UserInterface $user): void
     {
-        $this->set($user->id(), $this->factory->toArray($user));
+        $this->set(
+            $user->id(),
+            $this->factory->toArray($user)
+        );
     }
 
     public function update(UserInterface $user): void
     {
-        $this->set($user->id(), $this->factory->toArray($user));
+        $this->set(
+            $user->id(),
+            $this->factory->toArray($user)
+        );
     }
 
     /**
@@ -41,7 +48,9 @@ final class UsersRedisRepository implements Users
     // @TODO reverse methods
     public function find(UserId $id): UserInterface
     {
-        $params = $this->client->hgetall($id->value());
+        $params = $this->client->hgetall(
+            $this->keyPattern($id)
+        );
 
         return $this->factory->fromArray($params);
     }
@@ -49,11 +58,11 @@ final class UsersRedisRepository implements Users
     /** @throws UserNotFoundException */
     public function get(UserId $id): UserInterface
     {
-       if ($user = $this->find($id)) {
-          return $user;
-       }
+        if ($user = $this->find($id)) {
+            return $user;
+        }
 
-       throw new UserNotFoundException();
+        throw new UserNotFoundException();
     }
 
     /**
@@ -61,11 +70,13 @@ final class UsersRedisRepository implements Users
      */
     public function getByEmail(Email $email): UserInterface
     {
-        $keys = $this->client->keys('*');
+        $keys = $this->client->keys(
+            sprintf('%s*', self::RECORD_PATTERN)
+        );
 
         foreach ($keys as $key) {
             $user = $this->client->hgetall($key);
-            if($user['email'] === $email->value()) {
+            if ($user['email'] === $email->value()) {
                 return $this->factory->fromArray($user);
             }
         }
@@ -73,14 +84,23 @@ final class UsersRedisRepository implements Users
         throw new UserNotFoundException();
     }
 
-    // @TODO id not in the interface?
     public function remove(UserInterface $user): void
     {
-       $this->client->del($user->id()->value());
+        $this->client->del([
+            $this->keyPattern($user->id())
+        ]);
     }
 
     private function set(UserId $id, array $userData): void
     {
-        $this->client->hmset($id, $userData);
+        $this->client->hmset(
+            $this->keyPattern($id),
+            $userData
+        );
+    }
+
+    private function keyPattern(UserId $id): string
+    {
+        return sprintf('%s%s', self::RECORD_PATTERN, $id->value());
     }
 }
