@@ -2,17 +2,12 @@
 
 namespace App\Admin\UI\Command;
 
-use App\Admin\Domain\Model\Admin;
 use App\Admin\Domain\Repository\Admins;
 use App\Shared\Infrastructure\Generator\IdGeneratorInterface;
 use App\User\Domain\Enum\LocaleEnum;
-use App\User\Domain\ValueObject\CreatedAt;
-use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\Locale;
-use App\User\Domain\ValueObject\Password;
 use App\User\Domain\ValueObject\UpdatedAt;
 use App\User\Domain\ValueObject\UserId;
-use App\User\Infrastructure\Security\Hasher\PasswordHasherInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
