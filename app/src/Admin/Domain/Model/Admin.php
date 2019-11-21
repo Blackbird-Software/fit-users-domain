@@ -24,7 +24,7 @@ final class Admin extends AggregateRoot implements AdminInterface
 
     private CreatedAt $createdAt;
 
-    private ?UpdatedAt $updatedAt;
+    private ?UpdatedAt $updatedAt = null;
 
     private Locale $locale;
 

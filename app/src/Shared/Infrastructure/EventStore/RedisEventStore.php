@@ -21,8 +21,8 @@ final class RedisEventStore implements EventStore
 
     public function save(AggregateChanged $event): void
     {
-        $idx = $this->client->scard(self::MAIN_KEY);
-        $tmpKey = sprintf('event_%d', $idx);
+        $idx = $this->client->zcard(self::MAIN_KEY);
+        $tmpKey = sprintf('event_%d', ++$idx);
 
         $this->client->hmset($tmpKey, [
             'aggregate_id' => $event->aggregateId(),
@@ -31,7 +31,7 @@ final class RedisEventStore implements EventStore
             'version' => $event->version(),
         ]);
 
-        $this->client->sadd(self::MAIN_KEY, [$tmpKey]);
+        $this->client->zadd(self::MAIN_KEY, [$tmpKey => $idx]);
     }
 
     public function findAllEvents(): array
@@ -47,7 +47,7 @@ final class RedisEventStore implements EventStore
     private function events(?string $aggregateId = null): array
     {
         $events = [];
-        $eventReferences = $this->client->smembers(self::MAIN_KEY);
+        $eventReferences = $this->client->zrange(self::MAIN_KEY, 0, -1);
 
         foreach ($eventReferences as $eventReference) {
             $event = $this->client->hgetall($eventReference);
@@ -61,7 +61,7 @@ final class RedisEventStore implements EventStore
             }
         }
 
-        return array_reverse($events);
+        return $events;
     }
 
 }
