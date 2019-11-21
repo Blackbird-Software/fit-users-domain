@@ -61,7 +61,7 @@ final class RedisEventStore implements EventStore
             }
         }
 
-        return $events;
+        return array_reverse($events);
     }
 
 }

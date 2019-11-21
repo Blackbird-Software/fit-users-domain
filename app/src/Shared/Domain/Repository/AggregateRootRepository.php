@@ -8,7 +8,7 @@ use App\Admin\Domain\Event\EventTypeLocator;
 use App\Shared\Domain\Model\AggregateRoot;
 use App\Shared\Infrastructure\EventStore\EventStore;
 
-abstract class AggregateRootRepository
+abstract class AggregateRootRepository implements AggregateRootRepositoryInterface
 {
     private EventStore $eventStore;
 
@@ -16,8 +16,6 @@ abstract class AggregateRootRepository
     {
         $this->eventStore = $eventStore;
     }
-
-    abstract public function aggregateRootClass(): string;
 
     public function saveAggregateRoot(AggregateRoot $aggregateRoot): void
     {
