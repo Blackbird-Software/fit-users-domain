@@ -10,5 +10,7 @@ interface EventStore
 {
     public function save(AggregateChanged $event): void;
 
+    public function findAllEvents(): array;
+
     public function findEvents(string $aggregateId): array;
 }

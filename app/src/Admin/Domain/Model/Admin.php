@@ -38,6 +38,11 @@ final class Admin extends AggregateRoot implements AdminInterface
         ]));
     }
 
+    public function aggregateId(): string
+    {
+        return $this->id()->value();
+    }
+
     public static function create(UserId $id, Email $email, Password $password, CreatedAt $createdAt, Locale $locale): AdminInterface
     {
         return new self($id, $email, $password, $createdAt, $locale);

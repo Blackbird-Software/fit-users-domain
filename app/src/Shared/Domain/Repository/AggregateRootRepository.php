@@ -31,10 +31,28 @@ abstract class AggregateRootRepository
     /**
      * @throws \ReflectionException
      */
-    public function getAggregateRoot(string $aggregateId)
+    public function aggregateRoots(): array
+    {
+        $aggregateRoots = [];
+        $events = $this->eventStore->findAllEvents();
+
+        foreach ($events as $event) {
+            $aggregateId = $event['aggregate_id'];
+            $aggregateRoots[$aggregateId] = $this->aggregateRoot($aggregateId);
+        }
+
+        return $aggregateRoots;
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    public function aggregateRoot(string $aggregateId)
     {
         $events = $this->eventStore->findEvents($aggregateId);
         $reflection = new \ReflectionClass($this->aggregateRootClass());
+
+        /** @var AggregateRoot $object */
         $object = $reflection->newInstanceWithoutConstructor();
 
         foreach ($events as $eventMessage) {
@@ -52,7 +70,7 @@ abstract class AggregateRootRepository
                 $aggregateId,
                 $payload
             );
-            $event = $event->withVersion((int) $version);
+            $event = $event->withVersion((int)$version);
             $object->apply($event);
         }
 

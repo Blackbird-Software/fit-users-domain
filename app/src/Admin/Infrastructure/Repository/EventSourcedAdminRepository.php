@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Admin\Infrastructure\Repository;
@@ -32,7 +31,7 @@ final class EventSourcedAdminRepository extends AggregateRootRepository implemen
     // @TODO types?
     public function find(UserId $id): AdminInterface
     {
-         return $this->getAggregateRoot((string) $id);
+         return $this->aggregateRoot((string) $id);
     }
 
     public function get(UserId $id): AdminInterface
@@ -50,4 +49,8 @@ final class EventSourcedAdminRepository extends AggregateRootRepository implemen
         // TODO: Implement remove() method.
     }
 
+    public function findAll(): array
+    {
+        return $this->aggregateRoots();
+    }
 }

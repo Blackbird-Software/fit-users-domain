@@ -21,4 +21,6 @@ interface Admins
     public function getByEmail(Email $email): AdminInterface;
 
     public function remove(AdminInterface $admin): void;
+
+    public function findAll(): array;
 }

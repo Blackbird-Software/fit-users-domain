@@ -30,4 +30,6 @@ abstract class AggregateRoot
 
     // @TODO should not be public! IMPORTANT!!!
     abstract public function apply(AggregateChanged $event): void;
+
+    abstract public function aggregateId(): string;
 }
