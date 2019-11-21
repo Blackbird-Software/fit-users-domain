@@ -20,12 +20,13 @@ final class EventSourcedAdminRepository extends AggregateRootRepository implemen
 
     public function update(AdminInterface $admin): void
     {
-        // TODO: Implement update() method.
+        $this->saveAggregateRoot($admin);
     }
 
+    // @TODO types?
     public function find(UserId $id): AdminInterface
     {
-        // TODO: Implement find() method.
+         return $this->getAggregateRoot((string) $id);
     }
 
     public function get(UserId $id): AdminInterface

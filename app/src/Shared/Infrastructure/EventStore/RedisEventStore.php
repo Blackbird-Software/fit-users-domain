@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\EventStore;
 
+use App\Admin\Domain\Event\EventTypeLocator;
 use App\Shared\Domain\Event\AggregateChanged;
 use Predis\Client;
 
@@ -26,15 +27,27 @@ final class RedisEventStore implements EventStore
         $this->client->hmset($tmpKey, [
             'aggregate_id' => $event->aggregateId(),
             'event' => json_encode($event),
-            'version' => $event->version()
+            'event_type' => EventTypeLocator::getKeyByEvent($event),
+            'version' => $event->version(),
         ]);
 
         $this->client->sadd(self::MAIN_KEY, [$tmpKey]);
     }
 
-    public function findEvents($aggregateId)
+    public function findEvents(string $aggregateId): array
     {
-        // TODO: Implement findEvents() method.
+        $events = [];
+        $eventReferences = $this->client->smembers(self::MAIN_KEY);
+
+        foreach($eventReferences as $eventReference) {
+            $event = $this->client->hgetall($eventReference);
+
+            if($event['aggregate_id'] === $aggregateId) {
+                $events[] = $event;
+            }
+        }
+
+        return array_reverse($events);
     }
 
 }

@@ -10,6 +10,7 @@ use App\User\Domain\ValueObject\CreatedAt;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\Locale;
 use App\User\Domain\ValueObject\Password;
+use App\User\Domain\ValueObject\UpdatedAt;
 use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\Security\Hasher\PasswordHasherInterface;
 use Symfony\Component\Console\Command\Command;
@@ -19,21 +20,18 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-final class AddAdminCommand extends Command
+final class UpdateAdminCommand extends Command
 {
     /** @var string */
-    protected static $defaultName = 'app:admin:create';
+    protected static $defaultName = 'app:admin:update';
 
     private IdGeneratorInterface $generator;
 
-    private PasswordHasherInterface $passwordHasher;
-
     private Admins $admins;
 
-    public function __construct(IdGeneratorInterface $generator, PasswordHasherInterface $passwordHasher, Admins $admins)
+    public function __construct(IdGeneratorInterface $generator, Admins $admins)
     {
         $this->generator = $generator;
-        $this->passwordHasher = $passwordHasher;
         $this->admins = $admins;
         parent::__construct();
     }
@@ -41,8 +39,8 @@ final class AddAdminCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setDescription('Creates a new admin')
-            ->setHelp('This command allows you to create a new admin. E-mail address, password and locale are required. ');
+            ->setDescription('Updates given admin account')
+            ->setHelp('This command allows you to update given admin account. Id and locale are required. ');
     }
 
     /**
@@ -52,14 +50,8 @@ final class AddAdminCommand extends Command
     {
         // @TODO add validation
         $helper = $this->getHelper('question');
-        $emailQuestion = new Question('Please enter your e-mail address: ');
-        $email = $helper->ask($input, $output, $emailQuestion);
-
-        $passwordQuestion = new Question('Please enter your password: ');
-        $passwordQuestion->setHidden(true);
-        $passwordQuestion->setHiddenFallback(false);
-        $passwordQuestion->setMaxAttempts(2);
-        $password = $helper->ask($input, $output, $passwordQuestion);
+        $idQuestion = new Question('Please enter id: ');
+        $idAnswer = $helper->ask($input, $output, $idQuestion);
 
         $localeQuestion = new ChoiceQuestion(
             'Please select your language (defaults to English)',
@@ -69,21 +61,20 @@ final class AddAdminCommand extends Command
         $localeQuestion->setErrorMessage('Language %s is invalid.');
         $locale = $helper->ask($input, $output, $localeQuestion);
 
-        $admin = Admin::create(
-            new UserId($this->generator->generate()),
-            new Email($email),
-            new Password(($this->passwordHasher)($password)),
-            new CreatedAt(new \DateTimeImmutable()),
+        $id = $this->generator->generateFromString($idAnswer);
+        $admin = $this->admins->find(new UserId($id));
+        $admin->update(
+            new UpdatedAt(new \DateTimeImmutable()),
             new Locale(LocaleEnum::byName($locale)->getValue())
         );
-
-        $this->admins->add($admin);
+        $this->admins->update($admin);
 
         $io = new SymfonyStyle($input, $output);
         $io->success(
             sprintf(
-                'Successfully created admin account for given e-mail address: %s.',
-                $email,
+                'Successfully updated admin account for given id: %s with locale %s.',
+                $id,
+                $locale
             )
         );
     }

@@ -23,4 +23,9 @@ final class RandomIntegerId implements IdInterface
     {
         return $this->id;
     }
+
+    public static function fromString(string $string): IdInterface
+    {
+       return new self((int) $string);
+    }
 }

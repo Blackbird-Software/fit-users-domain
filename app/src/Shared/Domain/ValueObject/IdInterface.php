@@ -5,5 +5,5 @@ namespace App\Shared\Domain\ValueObject;
 
 interface IdInterface extends ValueObjectInterface
 {
-
+    public static function fromString(string $string): self;
 }

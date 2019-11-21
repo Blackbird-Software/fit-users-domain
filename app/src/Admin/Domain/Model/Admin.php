@@ -30,7 +30,12 @@ final class Admin extends AggregateRoot implements AdminInterface
 
     private function __construct(UserId $id, Email $email, Password $password, CreatedAt $createdAt, Locale $locale)
     {
-        $this->record(new AdminWasCreated($id, $email, $password, $createdAt, $locale));
+        $this->record(new AdminWasCreated($id->value(), [
+            'email' => $email->value(),
+            'password' => $password->value(),
+            'createdAt' => $createdAt->value()->format(\DATE_ATOM),
+            'locale' => $locale->value()
+        ]));
     }
 
     public static function create(UserId $id, Email $email, Password $password, CreatedAt $createdAt, Locale $locale): AdminInterface
@@ -40,10 +45,13 @@ final class Admin extends AggregateRoot implements AdminInterface
 
     public function update(UpdatedAt $updatedAt, Locale $locale): void
     {
-        $this->record(new AdminWasUpdated($this->id, $updatedAt, $locale));
+        $this->record(new AdminWasUpdated($this->id()->value(), [
+            'updatedAt' => $updatedAt->value()->format(\DATE_ATOM),
+            'locale' => $locale->value()
+        ]));
     }
 
-    protected function apply(AggregateChanged $event)
+    public function apply(AggregateChanged $event): void
     {
         switch (get_class($event)) {
             case AdminWasCreated::class:

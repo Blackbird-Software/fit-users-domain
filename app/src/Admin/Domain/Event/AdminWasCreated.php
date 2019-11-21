@@ -21,23 +21,23 @@ final class AdminWasCreated extends AggregateChanged
 
     private Locale $locale;
 
-    public function __construct(UserId $id, Email $email, Password $password, CreatedAt $createdAt, Locale $locale)
+    public function __construct(string $aggregateId, array $payload)
     {
-        $this->id = $id;
-        $this->email = $email;
-        $this->password = $password;
-        $this->createdAt = $createdAt;
-        $this->locale = $locale;
+        $this->id = UserId::fromString($aggregateId);
+        $this->email = new Email($payload['email']);
+        $this->password = new Password($payload['password']);
+        $this->createdAt = new CreatedAt(\DateTimeImmutable::createFromFormat(\DATE_ATOM, $payload['createdAt']));
+        $this->locale = new Locale($payload['locale']);
     }
 
     public function jsonSerialize(): array
     {
         return [
-            $this->id->value(),
-            $this->email->value(),
-            $this->password->value(),
-            $this->createdAt->value()->format(\DATE_ATOM),
-            $this->locale->value()
+            'id' => $this->id->value(),
+            'email' => $this->email->value(),
+            'password' => $this->password->value(),
+            'createdAt' => $this->createdAt->value()->format(\DATE_ATOM),
+            'locale' => $this->locale->value()
         ];
     }
 

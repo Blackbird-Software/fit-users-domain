@@ -10,9 +10,17 @@ final class UserId implements ValueObjectInterface
 {
     private string $value;
 
-    public function __construct(IdInterface $id)
+    /**
+     * @TODO refactor types IMPORTANT!!!
+     * @param IdInterface|string $id
+     */
+    public function __construct($id)
     {
-        $this->value = (string) $id->value();
+        if($id instanceof IdInterface) {
+            $this->value = (string) $id->value();
+        } else {
+            $this->value = $id;
+        }
     }
 
     public function __toString(): string
@@ -23,5 +31,10 @@ final class UserId implements ValueObjectInterface
     public function value(): string
     {
        return $this->value;
+    }
+
+    public static function fromString(string $id): self
+    {
+        return new self($id);
     }
 }

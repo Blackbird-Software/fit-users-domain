@@ -15,20 +15,20 @@ final class AdminWasUpdated extends AggregateChanged
 
     private Locale $locale;
 
-    public function __construct(UserId $id, UpdatedAt $updatedAt, Locale $locale)
+    public function __construct(string $aggregateId, array $payload)
     {
-        $this->id = $id;
-        $this->updatedAt = $updatedAt;
-        $this->locale = $locale;
+        $this->id = UserId::fromString($aggregateId);
+        $this->updatedAt = new UpdatedAt(\DateTimeImmutable::createFromFormat(\DATE_ATOM, $payload['updatedAt']));
+        $this->locale = new Locale($payload['locale']);
     }
 
     // @TODO NullPointerException?
     public function jsonSerialize(): array
     {
         return [
-            $this->id->value(),
-            $this->updatedAt->value()->format(\DATE_ATOM),
-            $this->locale->value()
+            'id' => $this->id->value(),
+            'updatedAt' => $this->updatedAt->value()->format(\DATE_ATOM),
+            'locale' => $this->locale->value()
         ];
     }
 

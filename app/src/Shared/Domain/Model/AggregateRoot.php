@@ -12,6 +12,7 @@ abstract class AggregateRoot
 
     protected int $version = 0;
 
+    // @TODO version is not saved properly
     protected function record(AggregateChanged $event) : void
     {
         $this->version += 1;
@@ -27,5 +28,6 @@ abstract class AggregateRoot
         return $pendingEvents;
     }
 
-    abstract protected function apply(AggregateChanged $event);
+    // @TODO should not be public! IMPORTANT!!!
+    abstract public function apply(AggregateChanged $event): void;
 }
