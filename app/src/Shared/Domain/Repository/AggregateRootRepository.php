@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Shared\Domain\Repository;
 
 use App\Admin\Domain\Event\EventTypeLocator;
-use App\Admin\Domain\Model\Admin;
 use App\Shared\Domain\Model\AggregateRoot;
 use App\Shared\Infrastructure\EventStore\EventStore;
 
@@ -18,10 +17,7 @@ abstract class AggregateRootRepository
         $this->eventStore = $eventStore;
     }
 
-    public function class(): string
-    {
-        return Admin::class;
-    }
+    abstract public function aggregateRootClass(): string;
 
     public function saveAggregateRoot(AggregateRoot $aggregateRoot): void
     {
@@ -38,7 +34,7 @@ abstract class AggregateRootRepository
     public function getAggregateRoot(string $aggregateId)
     {
         $events = $this->eventStore->findEvents($aggregateId);
-        $reflection = new \ReflectionClass($this->class());
+        $reflection = new \ReflectionClass($this->aggregateRootClass());
         $object = $reflection->newInstanceWithoutConstructor();
 
         foreach ($events as $eventMessage) {

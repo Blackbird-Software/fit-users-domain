@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\Infrastructure\Repository;
 
+use App\Admin\Domain\Model\Admin;
 use App\Admin\Domain\Model\AdminInterface;
 use App\Admin\Domain\Repository\Admins;
 use App\Shared\Domain\Repository\AggregateRootRepository;
@@ -12,6 +13,11 @@ use App\User\Domain\ValueObject\UserId;
 
 final class EventSourcedAdminRepository extends AggregateRootRepository implements Admins
 {
+    public function aggregateRootClass(): string
+    {
+        return Admin::class;
+    }
+
     // @TODO what to do with mismatch types?
     public function add(AdminInterface $admin): void
     {
