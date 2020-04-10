@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Admin\Domain\Event;
 
-use App\Shared\Domain\Event\AggregateChanged;
-use App\Shared\Domain\Event\EventTypeLocatorInterface;
+use App\Common\Domain\Event\AggregateChanged;
+use App\Common\Domain\Event\EventTypeLocatorInterface;
 
 final class EventTypeLocator implements EventTypeLocatorInterface
 {

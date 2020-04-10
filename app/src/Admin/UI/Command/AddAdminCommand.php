@@ -4,7 +4,7 @@ namespace App\Admin\UI\Command;
 
 use App\Admin\Domain\Model\Admin;
 use App\Admin\Domain\Repository\Admins;
-use App\Shared\Infrastructure\Generator\IdGeneratorInterface;
+use App\Common\Infrastructure\Generator\IdGeneratorInterface;
 use App\User\Domain\Enum\LocaleEnum;
 use App\User\Domain\ValueObject\CreatedAt;
 use App\User\Domain\ValueObject\Email;

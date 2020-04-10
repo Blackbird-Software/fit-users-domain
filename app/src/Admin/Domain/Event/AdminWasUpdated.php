@@ -2,53 +2,47 @@
 
 namespace App\Admin\Domain\Event;
 
-use App\Shared\Domain\Event\AggregateChanged;
+use App\Common\Domain\Event\AggregateChanged;
 use App\User\Domain\ValueObject\Locale;
 use App\User\Domain\ValueObject\UpdatedAt;
 use App\User\Domain\ValueObject\UserId;
 
 final class AdminWasUpdated extends AggregateChanged
 {
-    private UserId $id;
-
-    private UpdatedAt $updatedAt;
-
-    private Locale $locale;
-
-    public function __construct(string $aggregateId, array $payload)
+    public static function withData(UserId $id, UpdatedAt $updatedAt, Locale $locale): AdminWasUpdated
     {
-        $this->id = UserId::fromString($aggregateId);
-        $this->updatedAt = new UpdatedAt(\DateTimeImmutable::createFromFormat(\DATE_ATOM, $payload['updatedAt']));
-        $this->locale = new Locale($payload['locale']);
+        // updatedAt cannot be null?
+        return self::occur(
+            $id->value(),
+            [
+                'updatedAt' => $updatedAt->value()->format(\DATE_ATOM),
+                'locale' => $locale->value()
+            ]
+        );
     }
 
     // @TODO NullPointerException?
     public function jsonSerialize(): array
     {
         return [
-            'id' => $this->id->value(),
-            'updatedAt' => $this->updatedAt->value()->format(\DATE_ATOM),
-            'locale' => $this->locale->value()
+            'id' => $this->id()->value(),
+            'updatedAt' => $this->updatedAt()->value()->format(\DATE_ATOM),
+            'locale' => $this->locale()->value()
         ];
-    }
-
-    public function aggregateId(): string
-    {
-        return (string) $this->id;
     }
 
     public function id(): UserId
     {
-        return $this->id;
+        return UserId::fromString($this->aggregateId());
     }
 
     public function updatedAt(): UpdatedAt
     {
-        return $this->updatedAt;
+        return new UpdatedAt(\DateTimeImmutable::createFromFormat(\DATE_ATOM, $this->payload()['updatedAt']));
     }
 
     public function locale(): Locale
     {
-        return $this->locale;
+        return new Locale($this->payload()['locale']);
     }
 }

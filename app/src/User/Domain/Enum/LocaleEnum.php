@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\User\Domain\Enum;
 
-use App\Shared\Domain\Enum\AbstractEnum;
+use App\Common\Domain\Enum\AbstractEnum;
 
 final class LocaleEnum extends AbstractEnum
 {

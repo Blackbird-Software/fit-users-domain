@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\ReadModel\Repository;
 
-use App\Shared\Infrastructure\Pagination\PaginatedCollectionInterface;
+use App\Common\Infrastructure\Pagination\PaginatedCollectionInterface;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\ReadModel\Exception\UserViewNotFoundException;

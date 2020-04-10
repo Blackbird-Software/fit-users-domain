@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\DTO;
 
-use App\Shared\Infrastructure\DTO\RequestDTOInterface;
+use App\Common\Infrastructure\DTO\RequestDTOInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\User\Domain\Enum\LocaleEnum;

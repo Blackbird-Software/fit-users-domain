@@ -5,5 +5,5 @@ services:
     public: true
 
   generators:
-    namespace: App\Shared\Infrastructure\Generator\
-    resource: "%kernel.project_dir%/src/Shared/Infrastructure/Generator/*"
+    namespace: App\Common\Infrastructure\Generator\
+    resource: "%kernel.project_dir%/src/Common/Infrastructure/Generator/*"

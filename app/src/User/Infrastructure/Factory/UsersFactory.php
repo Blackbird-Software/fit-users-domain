@@ -20,7 +20,7 @@ use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\DTO\RegisterUserRequest;
 use App\User\Infrastructure\DTO\UpdateUserRequest;
 use App\User\Infrastructure\Security\Hasher\PasswordHasherInterface;
-use App\Shared\Infrastructure\Generator\IdGeneratorInterface;
+use App\Common\Infrastructure\Generator\IdGeneratorInterface;
 
 final class UsersFactory implements UsersFactoryInterface
 {

@@ -12,9 +12,9 @@ services:
 
     Predis\Client: '@snc_redis.default'
 
-    # SHARED
-    App\Shared\Infrastructure\Generator\IdGeneratorInterface: '@App\Shared\Infrastructure\Generator\RandomIntegerIdGenerator'
-    App\Shared\Infrastructure\EventStore\EventStore: '@App\Shared\Infrastructure\EventStore\RedisEventStore'
+    # Common
+    App\Common\Infrastructure\Generator\IdGeneratorInterface: '@App\Common\Infrastructure\Generator\RandomIntegerIdGenerator'
+    App\Common\Infrastructure\EventStore\EventStore: '@App\Common\Infrastructure\EventStore\RedisEventStore'
 
     # USER
     App\User\Domain\Repository\Users: '@App\User\Infrastructure\Repository\UsersRedisRepository'
@@ -25,13 +25,13 @@ services:
     App\User\Infrastructure\Factory\UsersFactoryInterface: '@App\User\Infrastructure\Factory\UsersFactory'
     App\User\Infrastructure\ReadModel\Factory\UserViewsFactoryInterface: '@App\User\Infrastructure\ReadModel\Factory\UserViewsFactory'
 
-    App\Shared\Application\CommandBusInterface: '@App\User\Application\CommandBus\SimpleCommandBus'
+    App\Common\Application\CommandBusInterface: '@App\User\Application\CommandBus\SimpleCommandBus'
 
     # ADMIN
     App\Admin\Domain\Repository\Admins: '@App\Admin\Infrastructure\Repository\EventSourcedAdminRepository'
 
     # @TODO make na interface!
-    App\Shared\Infrastructure\Api\ResponseFactory:
-        class: App\Shared\Infrastructure\Api\ResponseFactory
+    App\Common\Infrastructure\Api\ResponseFactory:
+        class: App\Common\Infrastructure\Api\ResponseFactory
 
 

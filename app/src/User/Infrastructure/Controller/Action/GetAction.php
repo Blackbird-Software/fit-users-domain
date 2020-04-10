@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\Controller\Action;
 
-use App\Shared\Infrastructure\Controller\Action\AbstractAction;
-use App\Shared\Infrastructure\Generator\IdGeneratorInterface;
+use App\Common\Infrastructure\Controller\Action\AbstractAction;
+use App\Common\Infrastructure\Generator\IdGeneratorInterface;
 use App\User\Domain\ValueObject\UserId;
 use App\User\Infrastructure\ReadModel\Exception\UserViewNotFoundException;
 use App\User\Infrastructure\ReadModel\Repository\UserViews;

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\Pagination;
 
-use App\Shared\Infrastructure\Pagination\PaginatedCollection;
-use App\Shared\Infrastructure\Pagination\PaginatedCollectionInterface;
-use App\Shared\Infrastructure\Pagination\PaginationFactory;
+use App\Common\Infrastructure\Pagination\PaginatedCollection;
+use App\Common\Infrastructure\Pagination\PaginatedCollectionInterface;
+use App\Common\Infrastructure\Pagination\PaginationFactory;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Routing\RouterInterface;

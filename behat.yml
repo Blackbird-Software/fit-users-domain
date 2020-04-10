@@ -7,8 +7,8 @@ default:
     FriendsOfBehat\SymfonyExtension:
       kernel:
         bootstrap: 'vendor/autoload.php'
-        path: 'src/Shared/Infrastructure/Kernel.php'
-        class: 'App\Shared\Infrastructure\Kernel'
+        path: 'src/Common/Infrastructure/Kernel.php'
+        class: 'App\Common\Infrastructure\Kernel'
     FriendsOfBehat\ContextServiceExtension:
       imports:
         - 'tests/Behat/Resources/config/services.xml'

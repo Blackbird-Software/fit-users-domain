@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\Controller\Action;
 
-use App\Shared\Application\CommandBusInterface;
-use App\Shared\Infrastructure\Controller\Action\AbstractAction;
+use App\Common\Application\CommandBusInterface;
+use App\Common\Infrastructure\Controller\Action\AbstractAction;
 use App\User\Application\Command\DeleteUserCommand;
 use App\User\Application\CommandHandler\DeleteUserCommandHandler;
-use App\Shared\Infrastructure\Generator\IdGeneratorInterface;
+use App\Common\Infrastructure\Generator\IdGeneratorInterface;
 use App\User\Domain\Repository\Users;
 use App\User\Domain\ValueObject\UserId;
 use JMS\Serializer\SerializerInterface;

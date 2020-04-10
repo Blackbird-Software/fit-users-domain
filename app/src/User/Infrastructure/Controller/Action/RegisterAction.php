@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\Controller\Action;
 
-use App\Shared\Application\CommandBusInterface;
-use App\Shared\Infrastructure\Controller\Action\AbstractAction;
+use App\Common\Application\CommandBusInterface;
+use App\Common\Infrastructure\Controller\Action\AbstractAction;
 use App\User\Application\Command\RegisterUserCommand;
 use App\User\Application\CommandHandler\RegisterUserCommandHandler;
 use App\User\Domain\Repository\Users;

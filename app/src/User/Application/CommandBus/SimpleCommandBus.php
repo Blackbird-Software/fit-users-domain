@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\User\Application\CommandBus;
 
-use App\Shared\Application\CommandBusInterface;
-use App\Shared\Application\CommandHandlerInterface;
-use App\Shared\Application\CommandInterface;
+use App\Common\Application\CommandBusInterface;
+use App\Common\Application\CommandHandlerInterface;
+use App\Common\Application\CommandInterface;
 use Assert\Assertion;
 use Assert\AssertionFailedException;
 

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\User\Domain\ValueObject;
 
-use App\Shared\Domain\ValueObject\ValueObjectInterface;
+use App\Common\Domain\ValueObject\ValueObjectInterface;
 use App\User\Domain\ValueObject\Exception\InvalidCreatedAtException;
 use App\User\Domain\ValueObject\Exception\InvalidUpdatedAtException;
 use App\User\Domain\ValueObject\Validator\DateIsGreaterThanTodayValidator;

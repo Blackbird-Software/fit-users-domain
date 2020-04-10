@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace App\Admin\Domain\Model;
 
 use App\Admin\Domain\Event\AdminWasCreated;
-use App\Shared\Domain\Event\AggregateChanged;
-use App\Shared\Domain\Model\AggregateRoot;
+use App\Common\Domain\Event\AggregateChanged;
+use App\Common\Domain\Model\AggregateRoot;
 use App\Admin\Domain\Event\AdminWasUpdated;
 use App\User\Domain\ValueObject\CreatedAt;
 use App\User\Domain\ValueObject\Email;
@@ -30,12 +30,11 @@ final class Admin extends AggregateRoot implements AdminInterface
 
     private function __construct(UserId $id, Email $email, Password $password, CreatedAt $createdAt, Locale $locale)
     {
-        $this->record(new AdminWasCreated($id->value(), [
-            'email' => $email->value(),
-            'password' => $password->value(),
-            'createdAt' => $createdAt->value()->format(\DATE_ATOM),
-            'locale' => $locale->value()
-        ]));
+        $this->id = $id;
+        $this->email = $email;
+        $this->password = $password;
+        $this->createdAt = $createdAt;
+        $this->locale = $locale;
     }
 
     public function aggregateId(): string
@@ -43,17 +42,32 @@ final class Admin extends AggregateRoot implements AdminInterface
         return $this->id()->value();
     }
 
-    public static function create(UserId $id, Email $email, Password $password, CreatedAt $createdAt, Locale $locale): AdminInterface
+    public static function create(UserId $id, Email $email, Password $password, CreatedAt $createdAt,
+                                  Locale $locale): AdminInterface
     {
-        return new self($id, $email, $password, $createdAt, $locale);
+        $admin = new self($id, $email, $password, $createdAt, $locale);
+
+        $admin->record(
+            AdminWasCreated::withData(
+                $id,
+                $email,
+                $password,
+                $createdAt,
+                $locale
+            )
+        );
+
+        return $admin;
     }
 
     public function update(UpdatedAt $updatedAt, Locale $locale): void
     {
-        $this->record(new AdminWasUpdated($this->id()->value(), [
-            'updatedAt' => $updatedAt->value()->format(\DATE_ATOM),
-            'locale' => $locale->value()
-        ]));
+        $this->record(AdminWasUpdated::withData(
+                $this->id,
+                $updatedAt,
+                $locale
+            )
+        );
     }
 
     public function apply(AggregateChanged $event): void

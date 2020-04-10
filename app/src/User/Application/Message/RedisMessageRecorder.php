@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\User\Application\Message;
 
-use App\Shared\Application\Message\CollectedMessage;
-use App\Shared\Application\Message\MessageRecorder;
+use App\Common\Application\Message\CollectedMessage;
+use App\Common\Application\Message\MessageRecorder;
 use Predis\Client;
 
 final class RedisMessageRecorder implements MessageRecorder

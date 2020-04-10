@@ -6,7 +6,7 @@ namespace App\Admin\Infrastructure\Repository;
 use App\Admin\Domain\Model\Admin;
 use App\Admin\Domain\Model\AdminInterface;
 use App\Admin\Domain\Repository\Admins;
-use App\Shared\Domain\Repository\AggregateRootRepository;
+use App\Common\Domain\Repository\AggregateRootRepository;
 use App\User\Domain\ValueObject\Email;
 use App\User\Domain\ValueObject\UserId;
 

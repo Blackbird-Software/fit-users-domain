@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Context\Application;
 
-use App\Shared\Application\CommandBusInterface;
-use App\Shared\Infrastructure\Generator\IdGeneratorInterface;
+use App\Common\Application\CommandBusInterface;
+use App\Common\Infrastructure\Generator\IdGeneratorInterface;
 use Behat\Behat\Context\Context;
 
 final class UserContext implements Context

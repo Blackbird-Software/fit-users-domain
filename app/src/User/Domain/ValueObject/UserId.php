@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\User\Domain\ValueObject;
 
-use App\Shared\Domain\ValueObject\IdInterface;
-use App\Shared\Domain\ValueObject\ValueObjectInterface;
+use App\Common\Domain\ValueObject\IdInterface;
+use App\Common\Domain\ValueObject\ValueObjectInterface;
 
 final class UserId implements ValueObjectInterface
 {

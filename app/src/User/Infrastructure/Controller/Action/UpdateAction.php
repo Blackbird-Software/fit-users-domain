@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\Controller\Action;
 
-use App\Shared\Application\CommandBusInterface;
-use App\Shared\Infrastructure\Controller\Action\AbstractAction;
-use App\Shared\Infrastructure\Generator\IdGeneratorInterface;
+use App\Common\Application\CommandBusInterface;
+use App\Common\Infrastructure\Controller\Action\AbstractAction;
+use App\Common\Infrastructure\Generator\IdGeneratorInterface;
 use App\User\Application\Command\UpdateUserCommand;
 use App\User\Application\CommandHandler\UpdateCommandHandler;
 use App\User\Domain\Repository\Users;

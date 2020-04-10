@@ -4,7 +4,7 @@ namespace App\Admin\UI\Command;
 
 use App\Admin\Domain\Model\AdminInterface;
 use App\Admin\Domain\Repository\Admins;
-use App\Shared\Infrastructure\Generator\IdGeneratorInterface;
+use App\Common\Infrastructure\Generator\IdGeneratorInterface;
 use App\User\Domain\ValueObject\UserId;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;

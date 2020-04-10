@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\User\Application\Command;
 
-use App\Shared\Application\CommandInterface;
+use App\Common\Application\CommandInterface;
 use App\User\Domain\ValueObject\Firstname;
 use App\User\Domain\ValueObject\Lastname;
 use App\User\Domain\ValueObject\Locale;
